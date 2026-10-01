@@ -58,3 +58,6 @@ scratch/
 
 # ELF challenge binaries downloaded at runtime (no extension) — keep out of git
 chal/pwn/moonbase-radio/receipt
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/

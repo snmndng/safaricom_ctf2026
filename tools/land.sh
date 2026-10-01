@@ -61,8 +61,9 @@ open(p, "w").write(s2)
 print(f"CHALLENGES.md: solved -> {n}")
 PY
 
-# 5. One commit for the bookkeeping.
-git add -A
+# 5. One commit for the bookkeeping. Explicit paths only — a bare `git add -A`
+#    sweeps in .claude/worktrees (embedded repos) and other harness-local files.
+git add CHALLENGES.md TARGETS.md FLAGS.md .gitignore
 if git diff --cached --quiet; then
   echo "land.sh: nothing to commit (board already current)"
 else

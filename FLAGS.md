@@ -46,3 +46,4 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | web/upload-your-art | `safctf{059507cb1ce1b9fa4dbf4ad6cfb83a4a}` | chal/web/upload-your-art/solve.py |
 | web/velvet-rehearsal | `safctf{1745c9cc8a433522796feb9cfb8275de}` | chal/web/velvet-rehearsal/NOTES.md |
 | web/you-snitch | `safctf{73c4979d1dccb358dbfbaca5233666ca}` | chal/web/you-snitch/NOTES.md |
+| xxe/archived | `safctf{960c0e8a73c24bd9b1aee314ded96157}` | chal/xxe/archived/NOTES.md |

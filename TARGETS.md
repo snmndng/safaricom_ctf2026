@@ -124,7 +124,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8200 | Encore | todo | PWN |
 | 8210 | Fancy Details | todo | FOR |
 | 8220 | Fan Signal Lab | todo | CVE (was "Text4Shell Lab") |
-| 8230 | Archived | todo | XXE |
+| 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
 | 8330 | Night Bus | todo | API |
 | 8340 | Backstage Ledger | todo | API |
 | 8350 | Photo Finish | todo | API |

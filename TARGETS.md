@@ -19,27 +19,27 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8060 | Know Your Limits | solved | |
 | 8070 | Lightweight Directory | solved | LDAP filter injection (`*)(uid=*))(|(uid=*`) → admin session |
 | 8080 | Internal Affairs | solved | |
-| 8090 | Secret Vault | in progress | title "THE VELVET ROOM", Werkzeug — SSRF lead |
+| 8090 | Secret Vault | solved | login SQLi, WAF spacing bypass (`'OR'`) + leaked AES key |
 | 8100 | JWT Forgery | solved | |
 | 8110 | Mr Beast Configuration | **blocked** | broken as deployed — see memory |
 | 8120 | Prompt Pirate | solved | |
-| 8140 | You Snitch | todo | title "THE DAILY SCOOP", **Apache/2.4.68** |
-| 8150 | Tomcat Path Traversal (front) | todo | title "BACKLOT 77", waitress — proxies to 8240 |
+| 8140 | You Snitch | solved | PHP UNION SQLi in `/lookup.php?name=` (PostgreSQL) |
+| 8150 | Tomcat Path Traversal (front) | solved | waitress Flask `GET /view?file=` traversal leaks `/app/app.py` creds |
 | 8160 | Upload Your Art | solved | |
 | 8170 | Inner Joiner | todo | 404 on `/`, Werkzeug |
 | 8180 | HEAD Office | solved | |
-| 8240 | Tomcat Path Traversal (backend) | todo | Apache Tomcat (404 page) |
+| 8240 | Tomcat Path Traversal (backend) | dead end | Tomcat 9.0.122, zero webapps; both CVEs N/A (Linux, read-only default) |
 | 8300 | Touchline Dispatch | solved | |
 | 8310 | Velvet Rehearsal | todo | Werkzeug |
 | 8320 | Citrus Proof | todo | Werkzeug |
 
 ## CLOUD
-| 8400 | Stageworks | todo | Werkzeug |
+| 8400 | Stageworks | solved | fake-AWS AssumeRole chain: leaked externalId + session tag |
 | 8410 | Greenroom Atlas | todo | Werkzeug |
 
 ## CRYPTO
 | 8420 | Three Encores | solved | RSA e=3, identical ciphertexts → plain integer cube root |
-| 8430 | Parallel Lines | todo | Werkzeug |
+| 8430 | Parallel Lines | solved | keystream reuse across the two parallel exports |
 | 8440 | Midnight Parcel | todo | Werkzeug |
 
 ## FORENSICS

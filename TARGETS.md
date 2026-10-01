@@ -63,7 +63,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8590 | Crown Studio | todo | Werkzeug |
 
 ## UNLISTED (live apps not in CHALLENGES.md)
-| 8540 | Pitlane Desk | ? | Werkzeug |
+| 8540 | Pitlane Desk | solved | SUID stage-report -> PATH hijack to root |
 | 8550 | Afterparty Crew | ? | Werkzeug |
 | 8560 | Workshop Nocturne | solved | tar symlink member → root job worker copies /root/receipt |
 | 8600 | Overtime | solved | 32-bit `40*qty` wrap bypasses `qty>99` (send 2**30) |

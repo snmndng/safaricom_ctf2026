@@ -1,16 +1,17 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Total: 51 challenges. Solved: 20 — plus 1 blocked (Mr Beast, broken as deployed).**
+**Total: 51 challenges. Solved: 21 — plus 1 blocked (Mr Beast, broken as deployed).**
 **Live target map (host/port per challenge) → [TARGETS.md](TARGETS.md). Updated 2026-10-02.**
 
-Solved (20):
+Solved (21):
 - **WEB** — Quick Recovery, Sneaky Includes, JWT Forgery (150); HEAD Office (250);
   Templated Malice, SSTI Secrets, Prompt Pirate, Internal Affairs, Upload Your Art,
   Touchline Dispatch, Know Your Limits (300); Ginger Juice Shop (350);
   Lightweight Directory, Tomcat Path Traversal, You Snitch, Secret Vault (400–450).
 - **CRY** — Three Encores (300); Parallel Lines (500).
 - **REV** — Pixel Courier (150).
-- **CLOUD** — Stageworks (500) — AssumeRole chain: leaked external ID + required session tag.
+- **CLOUD** — Stageworks (500) — AssumeRole chain: leaked external ID + required session tag;
+  Greenroom Atlas (750) — fake-K8s RBAC: automount a service-account token via workload logs.
 
 Triage columns:
 - **Conf** — confidence I can solve it, given a reachable target. `★★★` high, `★★` medium, `★` low/environment-dependent.

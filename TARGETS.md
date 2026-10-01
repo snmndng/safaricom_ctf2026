@@ -35,7 +35,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 
 ## CLOUD
 | 8400 | Stageworks | solved | fake-AWS AssumeRole chain: leaked externalId + session tag |
-| 8410 | Greenroom Atlas | todo | Werkzeug |
+| 8410 | Greenroom Atlas | solved | fake-K8s RBAC: automount SA token via workload logs → `/api/secrets` |
 
 ## CRYPTO
 | 8420 | Three Encores | solved | RSA e=3, identical ciphertexts → plain integer cube root |
@@ -73,9 +73,34 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8640 | Double Feature | ? | Werkzeug |
 | 8650 | Signal Garden | ? | Werkzeug |
 
+## "Offline" set — actually live behind desk apps (found 2026-10-02)
+
+The challenges with no obvious port each have a **desk page** on the host whose
+"Remote desk / Remote channel" line gives the real endpoint. Found by reading the
+page text of the unlisted ports:
+
+| Desk app | Port | Desk page | Remote endpoint | Artifact |
+| --- | --- | --- | --- | --- |
+| Pitlane Desk | 8540 | `:8540/` | `ssh player@54.72.82.22 -p 8700` (pw `matinee-visitor`) | — |
+| Afterparty Crew | 8550 | `:8550/` | `ssh player@54.72.82.22 -p 8710` (pw `matinee-visitor`) | — |
+| Workshop Nocturne | 8560 | `:8560/` | `ssh player@54.72.82.22 -p 8720` (pw `matinee-visitor`) | `/downloads/sample-job.tar` |
+| Overtime | 8600 | `:8600/` | `nc 54.72.82.22 8730` | `/downloads/receipt` |
+| Neon Cabaret | 8610 | `:8610/` | `nc 54.72.82.22 8740` | `/downloads/receipt` |
+| Moonbase Radio | 8620 | `:8620/` | `nc 54.72.82.22 8750` | `/downloads/receipt` |
+| Ticket Carousel | 8630 | `:8630/` | HTTP API on the desk itself | `/downloads/carousel.map` |
+
+Live banners (python socket; this box has **no `nc` binary**):
+- 8700/8710/8720 → `SSH-2.0-OpenSSH_10.0p2 Debian-7+deb13u4`
+- 8730 → `Overtime tickets. Quantity?\n`
+- 8740 → `Neon Cabaret. Guest line:\n`
+- 8750 → `Moonbase Radio\n`
+
+Ticket Carousel (8630) advertises `POST /api/round` (starts a round) and
+`POST /api/move` (accepts `round`, `symbol`).
+
 ## Offline / not found
-- 8700 — refused
+- 8000 — Path Least Travelled: **DOWN** (connection refused, rechecked 2026-10-02)
 - AI/ML, XXE (`Archived`), API (`Night Bus`), PWN (`Encore`), CVE (`Text4Shell Lab`),
   MOB (`No Strings Attached`, `Comeback Pocket`, `Northern Lights`, `Glass Arcade`),
-  FOR `Fancy Details` — no port identified yet; may live on another host or need
-  artifacts from the platform.
+  FOR (`Fancy Details`) — no port identified yet; may live on another host or need
+  artifacts from the platform. The desk apps above are the best candidates for these.

@@ -1,0 +1,53 @@
+# Nested unrelated repo (agent framework) — never track
+reasonix/
+
+# Challenge binaries / large artifacts — keep out of git, track hashes instead
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.iso
+*.qcow2
+*.vmdk
+*.apk
+*.apks
+*.dex
+*.jar
+*.bin
+*.img
+*.pcap
+*.pcapng
+*.evtx
+*.raw
+*.dd
+*.dmp
+*.so
+*.elf
+*.exe
+*.dll
+
+# Never commit captured flags or creds in bulk
+flags.local.md
+creds.local.*
+*.env
+.env
+!*.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Scratch
+/tmp/
+scratch/
+*.log

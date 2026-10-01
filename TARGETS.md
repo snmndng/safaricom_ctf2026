@@ -30,7 +30,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8180 | HEAD Office | solved | |
 | 8240 | Tomcat Path Traversal (backend) | dead end | Tomcat 9.0.122, zero webapps; both CVEs N/A (Linux, read-only default) |
 | 8300 | Touchline Dispatch | solved | |
-| 8310 | Velvet Rehearsal | todo | Werkzeug |
+| 8310 | Velvet Rehearsal | solved | HTTP param pollution: first `?member=` checked, last signed |
 | 8320 | Citrus Proof | todo | Werkzeug |
 
 ## CLOUD
@@ -43,8 +43,8 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8440 | Midnight Parcel | todo | Werkzeug |
 
 ## FORENSICS
-| 8450 | Matchday Replay | todo | Werkzeug |
-| 8460 | Second Pressing | todo | Werkzeug |
+| 8450 | Matchday Replay | solved | raw USER0 records, out-of-order reassembly + period-12 keystream |
+| 8460 | Second Pressing | solved | SQLite WAL — recover the pre-revision frame |
 | 8470 | Long Exposure | todo | Werkzeug |
 
 ## OSINT
@@ -66,10 +66,10 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8540 | Pitlane Desk | ? | Werkzeug |
 | 8550 | Afterparty Crew | ? | Werkzeug |
 | 8560 | Workshop Nocturne | ? | Werkzeug |
-| 8600 | Overtime | ? | Werkzeug |
-| 8610 | Neon Cabaret | ? | Werkzeug |
-| 8620 | Moonbase Radio | ? | Werkzeug |
-| 8630 | Ticket Carousel | ? | Werkzeug |
+| 8600 | Overtime | solved | 32-bit `40*qty` wrap bypasses `qty>99` (send 2**30) |
+| 8610 | Neon Cabaret | solved | `printf(user_buf)` → `%4919c%n` sets win global 0x1337 |
+| 8620 | Moonbase Radio | solved | UAF function pointer → ret2win (leak PIE via menu 1) |
+| 8630 | Ticket Carousel | solved | BFS the served 40-state DFA: `DAB` reaches closing state 39 |
 | 8640 | Double Feature | ? | Werkzeug |
 | 8650 | Signal Garden | ? | Werkzeug |
 
@@ -104,3 +104,11 @@ Ticket Carousel (8630) advertises `POST /api/round` (starts a round) and
   MOB (`No Strings Attached`, `Comeback Pocket`, `Northern Lights`, `Glass Arcade`),
   FOR (`Fancy Details`) — no port identified yet; may live on another host or need
   artifacts from the platform. The desk apps above are the best candidates for these.
+
+## Gotcha: `/submit` 403 is not the WAF
+
+Every desk app answers a **wrong** `/submit` with
+`403 {"message":"The request could not be completed.","ok":false}` — visually
+identical to the shared WAF's rejection. A **correct** answer returns
+`200 {"message":"<the real flag>","ok":true}`. So a 403 from `/submit` means
+"not the answer yet", not "blocked". (Confirmed on 8450 and 8630.)

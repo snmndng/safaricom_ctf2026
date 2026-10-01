@@ -54,7 +54,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 
 ## REVERSE
 | 8510 | Pixel Courier | solved | `/downloads/receipt` is a stripped ELF, not a PNG — checker inversion + XOR |
-| 8520 | Clockwork Ballet | todo | Werkzeug |
+| 8520 | Clockwork Ballet | solved | stripped ELF: TEA(32 rounds, 0x9e3779b9) + XOR mask at 0x404060 |
 | 8530 | Prism Orchestra | todo | Werkzeug |
 
 ## AD

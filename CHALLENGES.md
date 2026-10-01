@@ -1,16 +1,17 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Total: 51 challenges. Solved: 30 — plus 1 blocked (Mr Beast, broken as deployed).**
+**Total: 51 challenges. Solved: 31 — plus 1 blocked (Mr Beast, broken as deployed).**
 **Live target map (host/port per challenge) → [TARGETS.md](TARGETS.md). Updated 2026-10-02.**
 
-Solved (30):
+Solved (31):
 - **WEB** — Quick Recovery, Sneaky Includes, JWT Forgery (150); HEAD Office (250);
   Templated Malice, SSTI Secrets, Prompt Pirate, Internal Affairs, Upload Your Art,
   Touchline Dispatch, Know Your Limits (300); Ginger Juice Shop (350);
   Lightweight Directory, Tomcat Path Traversal, You Snitch, Secret Vault (400–450);
   Velvet Rehearsal (500) — HTTP parameter pollution in `/api/recovery`.
 - **CRY** — Three Encores (300); Parallel Lines (500).
-- **REV** — Pixel Courier (150); Clockwork Ballet (500) — TEA over 3 blocks + XOR mask.
+- **REV** — Pixel Courier (150); Clockwork Ballet (500) — TEA over 3 blocks + XOR mask;
+  Prism Orchestra (750) — 3-byte-op stack VM, inverted in reverse.
 - **CLOUD** — Stageworks (500) — AssumeRole chain: leaked external ID + required session tag;
   Greenroom Atlas (750) — fake-K8s RBAC: automount a service-account token via workload logs.
 - **PWN** — Overtime (32-bit `40*qty` wrap vs `qty>99` check);

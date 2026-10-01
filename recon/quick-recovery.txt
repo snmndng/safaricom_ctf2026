@@ -1,0 +1,22 @@
+
+=== http://54.72.82.22:8010 ===
+status : 200 OK
+  server: Apache/2.4.68 (Debian)
+title  : afterhours
+
+--- methods ---
+  HEAD    -> 200
+  OPTIONS -> 200  allow: GET,POST,OPTIONS,HEAD
+  POST    -> 200
+  PUT     -> 405  allow: GET,POST,OPTIONS,HEAD
+  TRACE   -> 405
+
+--- probing 66 paths ---
+  200      5944B  /
+  200       105B  /robots.txt
+  403       318B  /.htaccess
+  403       318B  /.htpasswd
+  403       318B  /server-status
+  403       318B  /assets/
+
+[note] 403/401 on a path is still a signal -- note it and move on.

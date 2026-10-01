@@ -1,0 +1,18 @@
+
+=== http://54.72.82.22:8030 ===
+status : 200 OK
+  server: Werkzeug/3.1.9 Python/3.10.21
+title  : side quest
+
+--- methods ---
+  HEAD    -> 200
+  OPTIONS -> 200  allow: HEAD, GET, OPTIONS
+  POST    -> 405  allow: HEAD, GET, OPTIONS
+  PUT     -> 405  allow: HEAD, GET, OPTIONS
+  TRACE   -> 405  allow: HEAD, GET, OPTIONS
+
+--- probing 66 paths ---
+  200      8429B  /
+  200         2B  /health
+
+[note] 403/401 on a path is still a signal -- note it and move on.

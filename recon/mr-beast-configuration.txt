@@ -1,0 +1,18 @@
+
+=== http://54.72.82.22:8110 ===
+status : 200 OK
+  server: Werkzeug/3.1.9 Python/3.11.16
+  access-control-allow-origin: *
+
+--- methods ---
+  HEAD    -> 200
+  OPTIONS -> 200  allow: GET, HEAD, OPTIONS
+  POST    -> 405  allow: GET, HEAD, OPTIONS
+  PUT     -> 405  allow: GET, HEAD, OPTIONS
+  TRACE   -> 405  allow: GET, HEAD, OPTIONS
+
+--- probing 66 paths ---
+  200      4680B  /
+  401        12B  /admin
+
+[note] 403/401 on a path is still a signal -- note it and move on.

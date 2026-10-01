@@ -9,7 +9,7 @@
 ## Flag
 
 ```
-safctf{1e9274e1840ff0f39bba61e0892e91d4}
+safctf{4d19e2980e16abb93f0ff0481e4729e1}
 ```
 
 ## Fingerprint
@@ -58,7 +58,7 @@ reply contains `ftcfas...` rather than `safctf...`:
 Invert it client-side:
 
 ```
-safctf{1e9274e1840ff0f39bba61e0892e91d4}
+safctf{4d19e2980e16abb93f0ff0481e4729e1}
 ```
 
 ## Why it works

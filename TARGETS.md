@@ -65,7 +65,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 ## UNLISTED (live apps not in CHALLENGES.md)
 | 8540 | Pitlane Desk | ? | Werkzeug |
 | 8550 | Afterparty Crew | ? | Werkzeug |
-| 8560 | Workshop Nocturne | ? | Werkzeug |
+| 8560 | Workshop Nocturne | solved | tar symlink member → root job worker copies /root/receipt |
 | 8600 | Overtime | solved | 32-bit `40*qty` wrap bypasses `qty>99` (send 2**30) |
 | 8610 | Neon Cabaret | solved | `printf(user_buf)` → `%4919c%n` sets win global 0x1337 |
 | 8620 | Moonbase Radio | solved | UAF function pointer → ret2win (leak PIE via menu 1) |

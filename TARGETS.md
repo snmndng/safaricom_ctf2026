@@ -15,11 +15,11 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8020 | Templated Malice | solved | |
 | 8030 | Sneaky Includes | solved | |
 | 8040 | SSTI Secrets | solved | |
-| 8050 | Ginger Juice Shop | todo | title "CITRUS STUDIO", Werkzeug |
+| 8050 | Ginger Juice Shop | solved | title "CITRUS STUDIO" — Jinja2 SSTI, blacklist bypass via query args |
 | 8060 | Know Your Limits | solved | |
-| 8070 | Lightweight Directory | todo | 302 on `/`, Werkzeug |
+| 8070 | Lightweight Directory | solved | LDAP filter injection (`*)(uid=*))(|(uid=*`) → admin session |
 | 8080 | Internal Affairs | solved | |
-| 8090 | Secret Vault | todo | title "THE VELVET ROOM", Werkzeug |
+| 8090 | Secret Vault | in progress | title "THE VELVET ROOM", Werkzeug — SSRF lead |
 | 8100 | JWT Forgery | solved | |
 | 8110 | Mr Beast Configuration | **blocked** | broken as deployed — see memory |
 | 8120 | Prompt Pirate | solved | |
@@ -38,7 +38,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8410 | Greenroom Atlas | todo | Werkzeug |
 
 ## CRYPTO
-| 8420 | Three Encores | todo | Werkzeug |
+| 8420 | Three Encores | solved | RSA e=3, identical ciphertexts → plain integer cube root |
 | 8430 | Parallel Lines | todo | Werkzeug |
 | 8440 | Midnight Parcel | todo | Werkzeug |
 
@@ -53,7 +53,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8500 | Blue Meridian | todo | Werkzeug |
 
 ## REVERSE
-| 8510 | Pixel Courier | todo | Werkzeug |
+| 8510 | Pixel Courier | solved | `/downloads/receipt` is a stripped ELF, not a PNG — checker inversion + XOR |
 | 8520 | Clockwork Ballet | todo | Werkzeug |
 | 8530 | Prism Orchestra | todo | Werkzeug |
 

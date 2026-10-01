@@ -1,11 +1,15 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Total: 51 challenges. Solved: 11 (all WEB) — plus 1 blocked (Mr Beast, broken as deployed).**
+**Total: 51 challenges. Solved: 15 — plus 1 blocked (Mr Beast, broken as deployed).**
 **Live target map (host/port per challenge) → [TARGETS.md](TARGETS.md). Updated 2026-10-02.**
 
-Solved: Quick Recovery, Sneaky Includes, JWT Forgery (150); HEAD Office (250);
-Templated Malice, SSTI Secrets, Prompt Pirate, Internal Affairs, Upload Your Art,
-Touchline Dispatch, Know Your Limits (300).
+Solved (15):
+- **WEB** — Quick Recovery, Sneaky Includes, JWT Forgery (150); HEAD Office (250);
+  Templated Malice, SSTI Secrets, Prompt Pirate, Internal Affairs, Upload Your Art,
+  Touchline Dispatch, Know Your Limits (300); Ginger Juice Shop (350);
+  Lightweight Directory (400).
+- **CRY** — Three Encores (300).
+- **REV** — Pixel Courier (150).
 
 Triage columns:
 - **Conf** — confidence I can solve it, given a reachable target. `★★★` high, `★★` medium, `★` low/environment-dependent.

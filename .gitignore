@@ -58,3 +58,4 @@ scratch/
 
 # ELF challenge binaries downloaded at runtime (no extension) — keep out of git
 chal/pwn/moonbase-radio/receipt
+chal/rev/prism-orchestra/receipt

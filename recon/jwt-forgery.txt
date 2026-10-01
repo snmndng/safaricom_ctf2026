@@ -1,0 +1,19 @@
+
+=== http://54.72.82.22:8100 ===
+status : 200 OK
+  x-powered-by: Express
+  set-cookie: auth=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VybmFtZSI6ImJvYiIsInJvbGUiOiJ1c2VyIn0.; Path=/; HttpOnly
+
+--- methods ---
+  HEAD    -> 200
+  OPTIONS -> 200  allow: GET,HEAD
+  POST    -> 404
+  PUT     -> 404
+  TRACE   -> 404
+
+--- probing 66 paths ---
+  200        61B  /
+  403        21B  /admin
+  403        21B  /admin/
+
+[note] 403/401 on a path is still a signal -- note it and move on.

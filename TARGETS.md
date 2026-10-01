@@ -64,7 +64,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 
 ## UNLISTED (live apps not in CHALLENGES.md)
 | 8540 | Pitlane Desk | solved | SUID stage-report -> PATH hijack to root |
-| 8550 | Afterparty Crew | ? | Werkzeug |
+| 8550 | Afterparty Crew | solved | sudo tar * wildcard -> --checkpoint-action=exec RCE as root |
 | 8560 | Workshop Nocturne | solved | tar symlink member → root job worker copies /root/receipt |
 | 8600 | Overtime | solved | 32-bit `40*qty` wrap bypasses `qty>99` (send 2**30) |
 | 8610 | Neon Cabaret | solved | `printf(user_buf)` → `%4919c%n` sets win global 0x1337 |

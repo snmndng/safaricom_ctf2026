@@ -1,6 +1,10 @@
 # Nested unrelated repo (agent framework) — never track
 reasonix/
 
+# Vendored third-party CTF skills (ljagiello/ctf-skills, MIT, rev in
+# .claude/skills/.upstream-rev). Restore by re-cloning upstream, not from git.
+.claude/skills/
+
 # Challenge binaries / large artifacts — keep out of git, track hashes instead
 *.zip
 *.tar

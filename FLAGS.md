@@ -7,6 +7,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 
 | Challenge | Flag | Source |
 | --- | --- | --- |
+| ai/fragments | `safctf{d432e09718e6cb46387f54e27dbc0168}` | chal/ai/fragments/NOTES.md |
 | cloud/greenroom-atlas | `safctf{6035ffad158ce604cb84927b77926d47}` | chal/cloud/greenroom-atlas/NOTES.md |
 | cloud/stageworks | `safctf{b9d2678027feea5870c41931b663fd6d}` | chal/cloud/stageworks/NOTES.md |
 | crypto/midnight-parcel | `safctf{8a99e6bb-7903-4f4e-b42a-7e594982528b}` | chal/crypto/midnight-parcel/NOTES.md |

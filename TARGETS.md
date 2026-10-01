@@ -112,3 +112,23 @@ Every desk app answers a **wrong** `/submit` with
 identical to the shared WAF's rejection. A **correct** answer returns
 `200 {"message":"<the real flag>","ok":true}`. So a 403 from `/submit` means
 "not the answer yet", not "blocked". (Confirmed on 8450 and 8630.)
+
+## Newly-mapped ports (from the platform's remaining list, 2026-10-02)
+
+Ports we had never found. Same host, same `safctf{}` flag.
+
+| Port | Challenge | Status | Notes |
+| --- | --- | --- | --- |
+| 8130 | No Strings Attached | todo | MOB |
+| 8190 | Fragments | solved | keyword-gated /ask: memory|recall|history returns the redacted conversation |
+| 8200 | Encore | todo | PWN |
+| 8210 | Fancy Details | todo | FOR |
+| 8220 | Fan Signal Lab | todo | CVE (was "Text4Shell Lab") |
+| 8230 | Archived | todo | XXE |
+| 8330 | Night Bus | todo | API |
+| 8340 | Backstage Ledger | todo | API |
+| 8350 | Photo Finish | todo | API |
+| 8360 | Comeback Pocket | todo | MOB |
+| 8370 | Northern Lights | todo | MOB |
+| 8380 | Glass Arcade | todo | MOB |
+| 8390 | Harbor Lights | todo | CLOUD |

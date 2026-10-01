@@ -40,7 +40,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 ## CRYPTO
 | 8420 | Three Encores | solved | RSA e=3, identical ciphertexts → plain integer cube root |
 | 8430 | Parallel Lines | solved | keystream reuse across the two parallel exports |
-| 8440 | Midnight Parcel | todo | Werkzeug |
+| 8440 | Midnight Parcel | solved | CBC padding oracle on POST /api/receipt |
 
 ## FORENSICS
 | 8450 | Matchday Replay | solved | raw USER0 records, out-of-order reassembly + period-12 keystream |

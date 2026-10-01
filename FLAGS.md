@@ -9,6 +9,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | --- | --- | --- |
 | cloud/greenroom-atlas | `safctf{6035ffad158ce604cb84927b77926d47}` | chal/cloud/greenroom-atlas/NOTES.md |
 | cloud/stageworks | `safctf{b9d2678027feea5870c41931b663fd6d}` | chal/cloud/stageworks/NOTES.md |
+| crypto/midnight-parcel | `safctf{8a99e6bb-7903-4f4e-b42a-7e594982528b}` | chal/crypto/midnight-parcel/NOTES.md |
 | crypto/parallel-lines | `safctf{0983d7d0-b930-468f-ac25-ecc6feecc856}` | chal/crypto/parallel-lines/NOTES.md |
 | crypto/parallel-lines | `safctf{8d6447b3f694f59efef1f015f58d04a7}` | chal/crypto/parallel-lines/NOTES.md |
 | crypto/three-encores | `safctf{0471ad15e84bb9f630e394e49dde85a9}` | chal/crypto/three-encores/solve.py |

@@ -125,7 +125,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8210 | Fancy Details | solved | EXIF Artist ROT13+reverse = AES passphrase; nested tar -> flag.txt |
 | 8220 | Fan Signal Lab | solved | Text4Shell CVE-2022-42889 on Commons Text 1.8; GET /home?message= interpolation sink |
 | 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
-| 8330 | Night Bus | todo | API. Desk: `GET /api/orders` lists booking refs, `GET /api/orders/<ref>` returns a receipt — suspect IDOR. (agent died on quota before exploiting) |
+| 8330 | Night Bus | solved | BOLA: object = sha256(reference)[:24]; next_reference leaks TOUR-2402 receipt |
 | 8340 | Backstage Ledger | todo | API |
 | 8350 | Photo Finish | todo | API |
 | 8360 | Comeback Pocket | todo | MOB |

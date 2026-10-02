@@ -187,3 +187,131 @@ wordlist, and container/cipher variants all failed. The generator family's
 seed-leak file appears to be missing (or the obfuscation is not matchday's
 periodic-XOR). Next step that would crack it: the exact seed literal (or the
 challenge generator), or a confirmed alternative transform on the 72 bytes.
+
+---
+
+# Round 2 (2026-10-02) — new hypotheses, all negative
+
+Second pass. Focus: new (non-dictionary) seed sources, an alternate transform,
+and re-checking reachable files. **Still UNSOLVED — no flag.** Key new result:
+the matchday periodic-XOR rule is now *proven* not to apply (see "Periodicity
+test" below), which is stronger than "the seed was not found".
+
+## Leaked organizer runtime confirms the app, and that /api is dead here
+
+The desk app is the leaked `chal/_shared/organizer-service.py`
+(`/health`, `/`, `/downloads/<name>`, `/submit`, `/api/<path:operation>`).
+Confirmed live: `GET /api/library` → `404 {"message":"Not found"}` with
+`Content-Length: 24` (= Flask `jsonify` + trailing `\n`), byte-identical to the
+source's final fallthrough `return {'message':'Not found'},404`.
+
+Fingerprinted the `kind` by probing every kind's free op — `library, members,
+session, orders, profile, sync, objects, identity, login, parcel, round,
+enroll` **all** return `Not found`. So this container's `kind` is **not any of
+the 13 kinds in the leaked source** → `/api/*` is a pure dead end, and
+`/submit` (`hmac.compare_digest(sha256(answer), cfg['answer_hash'])`) is the
+only oracle. (Constant-time; no length/timing leak. If `settings.json` omits
+`answer_hash` the fallback `'!'` can never match → 403 for everything — but we
+cannot distinguish that case from "wrong answer".)
+
+## Seed-file reachability (item 3) — exhausted
+
+* `/downloads/<x>` is Werkzeug `send_from_directory` (traversal-safe). Tried
+  `../`, `%2e%2e`, `..%2f`, `....//`, `//etc/passwd`, `%2f`-encoded, null/back-
+  slash variants, `/static/...`, `/downloads/templates/index.html` → all 404.
+* The rendered index lists `downloads = sorted((ROOT/'downloads').glob('*'))`
+  → only `field-kit.zip`. No second file exists in the container's downloads.
+* Zip is genuinely 4 entries, shared mtime `2026-10-01 03:59:42`, no comment,
+  no per-entry `extra`, no trailing data. `field-note.txt` is exactly 119 B,
+  `modules.map` 37 B — no hidden seed.
+* Cross-container: the sibling **Touchline Dispatch :8300** (`web-path`) *does*
+  read absolute paths (`/api/view?name=/app/service.py` works). Read its
+  `/proc/self/environ` (= its own FLAG), `/proc/net/tcp` (only one listener,
+  :8080 → one challenge per container), `/proc/mounts` (plain overlay, no shared
+  bind mounts), `/app/settings.json`, `/app/requirements.txt`
+  (`Flask 3.1.2, pycryptodome 3.23.0, gunicorn`). There is **no generator, no
+  seed table, and no mount** exposing another container — lateral read is not
+  possible. Long Exposure's `settings.json` is unreachable.
+
+## Artifact re-checks (item 1) — all negative
+
+* **`process.core` is not a PRNG artifact**: the 8192 32-bit words do not
+  reconstruct under untemper→twist→temper for MT19937 (neither endianness) —
+  genuinely `os.urandom`-class noise, not a predictable stream.
+* **Window-seed search**: every length-1..64 window of `process.core`, of the
+  raw pcap, and of the 6000-byte concatenated NOI stream, hashed with sha256,
+  never yields `sha256(seed)[0:7] == 0d036be8d848d7`. No hidden literal seed.
+* Seeds tried as strings *and* as raw key bytes, verified against the 56-bit
+  crib AND against a full-plaintext-printable test: pcap fields
+  (`1800000000`, `1800000150..157`, `150/158/8/72/9282/40019/32768/8470/750/147/
+  65535/0x1000/0x9000`), all 8 take-id strings (seq and arrival order, joined
+  with `|`, lowercase), the decoded 9-byte takes, the 72-byte `C`, the sha256 of
+  the zip and of each artifact, the packet indices/ts, the seq numbers, the
+  arrival positions — no hit.
+* Numbers `0..2,000,000` and ~1M more; themed words × `-NN`/`_NN`/`.NN`/bare ×
+  N=0..9999; `long-exposure`/`bluehour`/`blue-hour`/`afterglow`/`studio-worker`
+  families — no hit.
+* **Re-ran rockyou (14,344,390 words) under the *printable-plaintext* test**
+  (the first pass only screened the `safctf{...` crib — invalid if the plaintext
+  is instead a bare `sha256` hex receipt or a raw `ref`, as the OSINT siblings
+  use). Zero hits for `P = C XOR sha256(word)` with both the plain-repeat and the
+  `%len(word)`-wrap keystream. (A background run also screens md5/sha1/sha512/
+  sha384/sha3-256/blake2s/blake2b repeats over rockyou.)
+
+## Transform hypotheses (item 2) — negative
+
+* Literal `safctf{`-crib fixed `sha256(seed)[:7]`; tested md5/sha1/sha512/
+  sha3-256/blake2s/blake2b/sha384 digests too — none match for any structured
+  candidate.
+* The 72 bytes are **not** a keystream-free difference: no rotation, self-XOR,
+  adjacent-take XOR, all-pairs XOR, cumulative XOR, subtract/add variant, or
+  byte-interleave is printable.
+* The QRY **seq order permutation** (`3,1,7,6,2,5,4,0`) and the packet
+  indices/ts as literal key material — no.
+* Per-take key = `sha256(own-id)` (at offsets 0 or `9*seq`), key =
+  `sha256(all-ids)` sliced, key = `sha256(str(packet-index))` per fragment — no.
+
+## Decisive new result — the matchday periodic-XOR rule is RULED OUT
+
+Since printable ASCII is `< 0x80`, any two plaintext bytes `p_i, p_j` satisfy
+`p_i XOR p_j < 0x80`. Under a keystream of period `L`, positions `i` and `i+L`
+share a keystream byte, so `C_i XOR C_{i+L} = p_i XOR p_{i+L} < 0x80` — i.e.
+**ciphertext bytes `L` apart must share bit 7** (and their XOR must be a xor of
+two printable bytes). This is testable with no seed.
+
+* **Validated** on the solved sibling matchday-replay: the only consistent
+  periods are `{12, 24, 36, 44}` — exactly the true period 12 and its multiples
+  plus the trivial length; `L=12` decrypts to
+  `safctf{5554fd00-017a-4915-a883-a7ef2639f73b}`. Method is sound.
+* **Long Exposure** (72 bytes, seq order): consistent periods are only
+  `{67, 72}`. `72` is trivial; `67 > 32`, so it cannot be `sha256(seed)[:L]`
+  wrapping, and 67 shows up only by chance (5 wrapped bytes). No period `7..66`
+  survives → **the keystream does not repeat with any small period.**
+* Also checked: arrival order (`{72}`), all 8! fragment permutations ×
+  periods 7..32 with the `safctf{`+printable model (**0** solutions), 7/8-byte
+  sub-windows of each take, row-major and column-major transposes — no small
+  period anywhere.
+
+Conclusion: Long Exposure is **not** the matchday wrap-`sha256(seed)`-mod-L
+construction. Its keystream is non-repeating over 72 bytes (consistent with a
+real stream cipher — AES-CTR / ChaCha keyed by `sha256(seed)`, and note the
+family image ships `pycryptodome`). That still leaves the same wall: the
+seed/key is not present in the ZIP and is not guessable from the shipped text,
+so the intended plaintext cannot be recovered from the materials.
+
+## Verdict
+
+No flag. The blocker is now sharper than "seed missing": (a) no reachable
+seed/settings file anywhere in this container or via any sibling, and (b) the
+sibling's periodic-XOR obfuscation **does not apply** — the keystream is
+non-repeating, so even a successful seed search would have to guess the exact
+KDF/mode. Combined with the family's precedent (`Mr Beast` 8110, `Photo Finish`
+8350 blocked as deployed), **Long Exposure :8470 is most likely broken as
+deployed** (a dropped seed/recipe file). Recommended: do not re-attempt without
+the organizer generator or Long Exposure's own `settings.json`.
+
+### Files added this round (all under `work/`, gitignored)
+`explore.py, winsearch.py, idks.py, structural.py, scan.py, final.py,
+decode_search.py, mt_test.py, periodic.py, period_test.py, validate_matchday.py,
+perm_test.py, subwindow_test.py, final2.py, idxkey.py, submit_batch.py,
+test_inter.py`

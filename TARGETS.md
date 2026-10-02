@@ -132,3 +132,30 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8370 | Northern Lights | todo | MOB |
 | 8380 | Glass Arcade | todo | MOB |
 | 8390 | Harbor Lights | todo | CLOUD |
+
+## `/submit` availability across the remaining ports (probed 2026-10-02)
+
+`GET /submit` → **405** (POST-only route exists) means the app is a **desk app**:
+recover the receipt, then `POST /submit {"answer": "<receipt>"}` — that returns the
+**graded** flag. The recovered value is frequently only an intermediate.
+
+| Port | Challenge | `GET /submit` | `POST /submit` | Read |
+| --- | --- | --- | --- | --- |
+| 8320 | Citrus Proof | 405 | 403 | desk app — submit the receipt |
+| 8340 | Backstage Ledger | 405 | 403 | desk app |
+| 8480 | Paper Lanterns | 405 | 403 | desk app |
+| 8490 | Last Tram Home | 405 | 403 | desk app |
+| 8500 | Blue Meridian | 405 | 403 | desk app |
+| 8570 | Orchard Society | 405 | 403 | desk app |
+| 8580 | Winter Pavilion | 405 | 403 | desk app |
+| 8590 | Crown Studio | 405 | 403 | desk app |
+| 8640 | Double Feature | 405 | 403 | desk app |
+| 8650 | Signal Garden | 405 | 403 | desk app |
+| 8360 | Comeback Pocket | 405 | 403 | desk app |
+| 8370 | Northern Lights | 405 | 403 | desk app |
+| 8380 | Glass Arcade | 405 | 403 | desk app |
+| 8390 | Harbor Lights | 405 | 403 | desk app |
+| 8470 | Long Exposure | 405 | 403 | desk app |
+| 8170 | Inner Joiner | 404 | 404 | no route — documented dead end |
+| 8130 | No Strings Attached | 404 | 404 | Apache 2.4.68, serves a file (MOB) |
+| 8350 | Photo Finish | 400 | 400 | answers as `NessusWWW` — needs re-fingerprinting |

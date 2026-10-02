@@ -127,7 +127,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
 | 8330 | Night Bus | solved | BOLA: object = sha256(reference)[:24]; next_reference leaks TOUR-2402 receipt |
 | 8340 | Backstage Ledger | todo | API |
-| 8350 | Photo Finish | todo | re-fingerprinted 2026-10-02: stock **unregistered Nessus Expert** UI (HTTPS-only, `Server: NessusWWW`). Not the challenge app — see below. |
+| 8350 | Photo Finish | **blocked** | re-fingerprinted 2026-10-02: stock **unregistered Nessus Expert** UI (HTTPS-only, `Server: NessusWWW`). Challenge app not deployed — see below. |
 | 8360 | Comeback Pocket | todo | MOB |
 | 8370 | Northern Lights | todo | MOB |
 | 8380 | Glass Arcade | todo | MOB |

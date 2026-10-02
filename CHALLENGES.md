@@ -1,6 +1,6 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Total: 51 challenges. Solved: 44 — plus 1 blocked (Mr Beast, broken as deployed).**
+**Total: 51 challenges. Solved: 44 — plus 2 blocked (Mr Beast :8110 and Photo Finish :8350, both broken as deployed).**
 **Live target map (host/port per challenge) → [TARGETS.md](TARGETS.md). Updated 2026-10-02.**
 
 Solved (44):

@@ -127,7 +127,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
 | 8330 | Night Bus | solved | BOLA: object = sha256(reference)[:24]; next_reference leaks TOUR-2402 receipt |
 | 8340 | Backstage Ledger | todo | API |
-| 8350 | Photo Finish | todo | API |
+| 8350 | Photo Finish | todo | re-fingerprinted 2026-10-02: stock **unregistered Nessus Expert** UI (HTTPS-only, `Server: NessusWWW`). Not the challenge app — see below. |
 | 8360 | Comeback Pocket | todo | MOB |
 | 8370 | Northern Lights | todo | MOB |
 | 8380 | Glass Arcade | todo | MOB |
@@ -158,4 +158,29 @@ recover the receipt, then `POST /submit {"answer": "<receipt>"}` — that return
 | 8470 | Long Exposure | 405 | 403 | desk app |
 | 8170 | Inner Joiner | 404 | 404 | no route — documented dead end |
 | 8130 | No Strings Attached | 404 | 404 | Apache 2.4.68, serves a file (MOB) |
-| 8350 | Photo Finish | 400 | 400 | answers as `NessusWWW` — needs re-fingerprinting |
+| 8350 | Photo Finish | 400 | 400 | answers as `NessusWWW` — see below |
+
+## Photo Finish (8350) — likely a host-side deployment fault
+
+Re-fingerprinted 2026-10-02 and exhausted: Host-header vhosts (challenge name,
+neighbours, `localhost`, the IP), TLS SNI routing, ~130 direct app paths, a
+**full 1–65535 TCP sweep** (only the known ports plus a data-less transient
+`:2000`), HTTP/2, `/downloads`, ~55 Nessus endpoints, and the unauthenticated
+Nessus setup/cred paths. The port serves a **stock, unregistered Nessus Expert**
+web UI, and it is the lone outlier in a block where every neighbouring port
+answers as Werkzeug/Flask.
+
+No credentials or artifacts are obtainable by recon. Conclusion: the challenge
+app is **not deployed on this port** — a host-side fault, not a solvable service.
+Recorded rather than re-attempted, same treatment as Mr Beast (8110).
+
+Artifacts: `chal/api/photo-finish/NOTES.md` + `solve.py` (a re-fingerprinting
+harness that also drives the standard desk-app `/submit` flow should a real
+Werkzeug API ever appear on this port).
+
+## Lead: desk apps advertise 8700–8750
+
+The Photo Finish agent observed that the six desk apps point at **SSH/nc ports
+in the 8700–8750** range. Those ports were not in any prior sweep — **unverified**
+(the agent's sweep found no listener there, though it also found the sweep
+inconclusive), so treat this as a lead to confirm, not a fact.

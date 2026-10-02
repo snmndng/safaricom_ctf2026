@@ -70,7 +70,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8610 | Neon Cabaret | solved | `printf(user_buf)` → `%4919c%n` sets win global 0x1337 |
 | 8620 | Moonbase Radio | solved | UAF function pointer → ret2win (leak PIE via menu 1) |
 | 8630 | Ticket Carousel | solved | BFS the served 40-state DFA: `DAB` reaches closing state 39 |
-| 8640 | Double Feature | ? | Werkzeug |
+| 8640 | Double Feature | solved | duplicate zip members: read(ZipInfo) vs read(name) |
 | 8650 | Signal Garden | ? | Werkzeug |
 
 ## "Offline" set — actually live behind desk apps (found 2026-10-02)

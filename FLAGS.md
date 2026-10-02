@@ -28,6 +28,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | forensics/second-pressing | `safctf{12bbc51d-7450-44c6-af3f-1723514b8aad}` | chal/forensics/second-pressing/NOTES.md |
 | forensics/second-pressing | `safctf{34a793a0d11032abb97236fafc9b30c4}` | chal/forensics/second-pressing/NOTES.md |
 | misc/afterparty-crew | `safctf{66bda7b8ede495eb131f6bf5bbb9d889}` | chal/misc/afterparty-crew/NOTES.md |
+| misc/double-feature | `safctf{513195eb399c59321e043c54773185b7}` | chal/misc/double-feature/NOTES.md |
 | misc/pitlane-desk | `safctf{9cca688790c893101757448298adfb67}` | chal/misc/pitlane-desk/NOTES.md |
 | misc/ticket-carousel | `safctf{5b701cd93c298559638b8b4181bfa5e2}` | chal/misc/ticket-carousel/NOTES.md |
 | misc/workshop-nocturne | `safctf{1cf16fdf78edcd426f2b8e008c329206}` | chal/misc/workshop-nocturne/NOTES.md |

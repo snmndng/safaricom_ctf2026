@@ -122,7 +122,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8130 | No Strings Attached | todo | MOB |
 | 8190 | Fragments | solved | keyword-gated /ask: memory|recall|history returns the redacted conversation |
 | 8200 | Encore | todo | PWN |
-| 8210 | Fancy Details | todo | FOR |
+| 8210 | Fancy Details | solved | EXIF Artist ROT13+reverse = AES passphrase; nested tar -> flag.txt |
 | 8220 | Fan Signal Lab | solved | Text4Shell CVE-2022-42889 on Commons Text 1.8; GET /home?message= interpolation sink |
 | 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
 | 8330 | Night Bus | todo | API. Desk: `GET /api/orders` lists booking refs, `GET /api/orders/<ref>` returns a receipt — suspect IDOR. (agent died on quota before exploiting) |

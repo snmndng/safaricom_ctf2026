@@ -129,7 +129,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8340 | Backstage Ledger | todo | API |
 | 8350 | Photo Finish | **blocked** | re-fingerprinted 2026-10-02: stock **unregistered Nessus Expert** UI (HTTPS-only, `Server: NessusWWW`). Challenge app not deployed — see below. |
 | 8360 | Comeback Pocket | solved | see chal/ NOTES.md |
-| 8370 | Northern Lights | todo | MOB |
+| 8370 | Northern Lights | solved | see chal/ NOTES.md |
 | 8380 | Glass Arcade | todo | MOB |
 | 8390 | Harbor Lights | solved | see chal/ NOTES.md |
 

@@ -1,6 +1,9 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Total: 51 challenges. Solved: 50 — plus 2 blocked (Mr Beast :8110 and Photo Finish :8350, both broken as deployed).**
+**Solved: 51 — 59 flags.**
+Remaining in scope: Backstage Ledger :8340, Orchard Society :8570, Long Exposure :8470,
+Path Least Travelled :8000 (down — connection refused).
+Blocked as deployed: Mr Beast :8110, Photo Finish :8350.
 **Live target map (host/port per challenge) → [TARGETS.md](TARGETS.md). Updated 2026-10-02.**
 
 Solved (50):

@@ -45,7 +45,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 ## FORENSICS
 | 8450 | Matchday Replay | solved | raw USER0 records, out-of-order reassembly + period-12 keystream |
 | 8460 | Second Pressing | solved | SQLite WAL — recover the pre-revision frame |
-| 8470 | Long Exposure | todo | Werkzeug |
+| 8470 | Long Exposure | todo | 350-pt FOR. Deep negative — see `chal/forensics/long-exposure/NOTES.md`. Blocker: no seed/card id in any shipped file, so the keystream seed is unguessable from the materials. |
 
 ## OSINT
 | 8480 | Paper Lanterns | solved | see chal/ NOTES.md |

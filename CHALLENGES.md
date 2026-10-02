@@ -1,9 +1,9 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Total: 51 challenges. Solved: 45 — plus 2 blocked (Mr Beast :8110 and Photo Finish :8350, both broken as deployed).**
+**Total: 51 challenges. Solved: 46 — plus 2 blocked (Mr Beast :8110 and Photo Finish :8350, both broken as deployed).**
 **Live target map (host/port per challenge) → [TARGETS.md](TARGETS.md). Updated 2026-10-02.**
 
-Solved (45):
+Solved (46):
 - **WEB** — Quick Recovery, Sneaky Includes, JWT Forgery (150); HEAD Office (250);
   Templated Malice, SSTI Secrets, Prompt Pirate, Internal Affairs, Upload Your Art,
   Touchline Dispatch, Know Your Limits (300); Ginger Juice Shop (350);

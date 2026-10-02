@@ -119,7 +119,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 
 | Port | Challenge | Status | Notes |
 | --- | --- | --- | --- |
-| 8130 | No Strings Attached | todo | MOB |
+| 8130 | No Strings Attached | solved | see chal/ NOTES.md |
 | 8190 | Fragments | solved | keyword-gated /ask: memory|recall|history returns the redacted conversation |
 | 8200 | Encore | solved | 3-stage: XOR + Vigenere/ROT13 + gets() ret2win; answers to /submit/stageN |
 | 8210 | Fancy Details | solved | EXIF Artist ROT13+reverse = AES passphrase; nested tar -> flag.txt |

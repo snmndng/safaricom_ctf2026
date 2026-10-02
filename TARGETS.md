@@ -26,7 +26,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8140 | You Snitch | solved | PHP UNION SQLi in `/lookup.php?name=` (PostgreSQL) |
 | 8150 | Tomcat Path Traversal (front) | solved | waitress Flask `GET /view?file=` traversal leaks `/app/app.py` creds |
 | 8160 | Upload Your Art | solved | |
-| 8170 | Inner Joiner | todo | 404 on `/`, Werkzeug |
+| 8170 | Inner Joiner | **blocked** | no route — documented dead end. Re-probed 2026-10-02: every path (`/`, `/health`, `/downloads/`, `/submit`, `/api/`, `/robots.txt`) returns the bare `404 page not found`, i.e. Go's `http.NotFound`, not a Werkzeug HTML 404. The listener is up but registers no handlers. |
 | 8180 | HEAD Office | solved | |
 | 8240 | Tomcat Path Traversal (backend) | dead end | Tomcat 9.0.122, zero webapps; both CVEs N/A (Linux, read-only default) |
 | 8300 | Touchline Dispatch | solved | |

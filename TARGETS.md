@@ -50,7 +50,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 ## OSINT
 | 8480 | Paper Lanterns | todo | Werkzeug |
 | 8490 | Last Tram Home | todo | Werkzeug |
-| 8500 | Blue Meridian | todo | Werkzeug |
+| 8500 | Blue Meridian | solved | see chal/ NOTES.md |
 
 ## REVERSE
 | 8510 | Pixel Courier | solved | `/downloads/receipt` is a stripped ELF, not a PNG — checker inversion + XOR |

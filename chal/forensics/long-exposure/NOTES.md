@@ -281,8 +281,10 @@ two printable bytes). This is testable with no seed.
 
 * **Validated** on the solved sibling matchday-replay: the only consistent
   periods are `{12, 24, 36, 44}` — exactly the true period 12 and its multiples
-  plus the trivial length; `L=12` decrypts to
-  `safctf{5554fd00-017a-4915-a883-a7ef2639f73b}`. Method is sound.
+  plus the trivial length; `L=12` decrypts to matchday-replay's answer
+  `safctf{5554fd00-…-f73b}` (matchday's own flag, quoted here only as a
+  validation example — it is **not** Long Exposure's flag; do not credit it to
+  this challenge, cf. the `tools/flags.py` false positive below). Method is sound.
 * **Long Exposure** (72 bytes, seq order): consistent periods are only
   `{67, 72}`. `72` is trivial; `67 > 32`, so it cannot be `sha256(seed)[:L]`
   wrapping, and 67 shows up only by chance (5 wrapped bytes). No period `7..66`
@@ -315,3 +317,42 @@ the organizer generator or Long Exposure's own `settings.json`.
 decode_search.py, mt_test.py, periodic.py, period_test.py, validate_matchday.py,
 perm_test.py, subwindow_test.py, final2.py, idxkey.py, submit_batch.py,
 test_inter.py`
+
+---
+
+# Round 3 (2026-10-03) — the FLAGS.md row was a scraper false positive
+
+`FLAGS.md` briefly listed
+`forensics/long-exposure | safctf{5554fd00-…-f73b} | chal/forensics/long-exposure/NOTES.md`.
+That value is **matchday-replay's answer**, not a Long Exposure flag. Root cause:
+`tools/flags.py` collects *every* `safctf{...}` literal anywhere under `chal/**`,
+and this file's Round-2 text quoted matchday's answer as a validation example, so
+the 2026-10-02 flag regeneration (`893e9f1`, "board: land chal/api-photo-finish-r3")
+attributed it to Long Exposure too. Fixed by de-literalising that quotation
+(`safctf{5554fd00-…-f73b}`); `main`'s FLAGS.md never had the row and a fresh
+regeneration now stays clean.
+
+## Live re-checks (2026-10-03)
+
+* `POST /submit` on :8470 returns **HTTP 403 for every input**, including the
+  matchday answer. The leaked `chal/_shared/organizer-service.py` shows
+  `result()` returning 403 on failure, so a 403 means
+  `hmac.compare_digest(sha256(answer), cfg['answer_hash'])` never matches — i.e.
+  :8470's `settings.json` is missing `answer_hash` (the `'!'` fallback), making
+  `/submit` a decoy. **The correct answer, whatever it is, would not yield a
+  receipt through this app.**
+* Same UUID submitted to the sibling `:8450` (matchday-replay) returns
+  `{"ok":true,"message":"safctf{e2d6cc7b…e446}"}` (matchday's receipt) — direct
+  proof the value in the erroneous row belongs to matchday-replay.
+* `/api/<any>` (incl. `sync`, `dispatch`) still returns the dispatch fallthrough
+  `{"message":"Not found"}` (Content-Length 24), so :8470's `kind` matches none
+  of the 13 leaked kinds — **not** the unmapped `api-canonical`; `/api` is dead.
+* Fresh `GET /downloads/field-kit.zip`: unchanged
+  (sha256 `b6136138…c1940`); index page unchanged and carries no seed.
+
+## Verdict (unchanged, now with the board defect explained)
+
+Long Exposure remains **UNSOLVED**; its genuine flag is still unrecovered. The
+`FLAGS.md` entry was a bookkeeping false positive (matchday's answer), which is
+exactly why it fails to submit. Do not record any flag for this challenge until
+the seed/recipe or the organizer generator is available.

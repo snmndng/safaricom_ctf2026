@@ -59,7 +59,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 
 ## AD
 | 8570 | Orchard Society | todo | Werkzeug |
-| 8580 | Winter Pavilion | todo | Werkzeug |
+| 8580 | Winter Pavilion | solved | see chal/ NOTES.md |
 | 8590 | Crown Studio | solved | see chal/ NOTES.md |
 
 ## UNLISTED (live apps not in CHALLENGES.md)

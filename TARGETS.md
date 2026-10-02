@@ -125,7 +125,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8210 | Fancy Details | todo | FOR |
 | 8220 | Fan Signal Lab | todo | CVE (was "Text4Shell Lab") |
 | 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
-| 8330 | Night Bus | todo | API |
+| 8330 | Night Bus | todo | API. Desk: `GET /api/orders` lists booking refs, `GET /api/orders/<ref>` returns a receipt — suspect IDOR. (agent died on quota before exploiting) |
 | 8340 | Backstage Ledger | todo | API |
 | 8350 | Photo Finish | todo | API |
 | 8360 | Comeback Pocket | todo | MOB |

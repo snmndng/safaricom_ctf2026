@@ -31,7 +31,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8240 | Tomcat Path Traversal (backend) | dead end | Tomcat 9.0.122, zero webapps; both CVEs N/A (Linux, read-only default) |
 | 8300 | Touchline Dispatch | solved | |
 | 8310 | Velvet Rehearsal | solved | HTTP param pollution: first `?member=` checked, last signed |
-| 8320 | Citrus Proof | todo | Werkzeug |
+| 8320 | Citrus Proof | todo | 550-pt web. Blocked on the HS256 secret behind the role-gated `POST /api/proof` — see `chal/web/citrus-proof/NOTES.md`. `/api/session` always mints `{"role":"visitor"}`. |
 
 ## CLOUD
 | 8400 | Stageworks | solved | fake-AWS AssumeRole chain: leaked externalId + session tag |

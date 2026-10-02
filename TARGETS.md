@@ -178,9 +178,17 @@ Artifacts: `chal/api/photo-finish/NOTES.md` + `solve.py` (a re-fingerprinting
 harness that also drives the standard desk-app `/submit` flow should a real
 Werkzeug API ever appear on this port).
 
-## Lead: desk apps advertise 8700–8750
+## Lead closed: desk apps advertise 8700–8750
 
 The Photo Finish agent observed that the six desk apps point at **SSH/nc ports
-in the 8700–8750** range. Those ports were not in any prior sweep — **unverified**
-(the agent's sweep found no listener there, though it also found the sweep
-inconclusive), so treat this as a lead to confirm, not a fact.
+in the 8700–8750** range. Re-verified 2026-10-02 with a direct connect sweep of
+8700–8759: the listeners are all already-solved challenges, not a new target.
+
+| Port | Banner | Owner |
+| --- | --- | --- |
+| 8700 | SSH-2.0-OpenSSH_10.0p2 | Pitlane Desk :8540 (solved) |
+| 8710 | SSH-2.0-OpenSSH_10.0p2 | Afterparty Crew :8550 (solved) |
+| 8720 | SSH-2.0-OpenSSH_10.0p2 | Workshop Nocturne :8560 (solved) |
+| 8730/8740/8750 | pwn service banners | Overtime/Neon Cabaret/Moonbase Radio (solved) |
+
+Nothing else in 8700–8759 is listening. Lead closed.

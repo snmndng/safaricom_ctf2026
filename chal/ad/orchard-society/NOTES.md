@@ -3,7 +3,7 @@
 - **Target:** `http://54.72.82.22:8570` (Werkzeug 3.1.9 / Flask, desk app of the
   family runtime, but a **newer** build than the leaked `:8300` source)
 - **Status:** ❌ UNSOLVED — decision fully resolved, receipt string not found
-  (~235k submissions, all 403). See "Verdict".
+  (~337k submissions, all 403). See "Verdict".
 
 ## App surface
 
@@ -22,9 +22,12 @@ compared with `hmac.compare_digest(sha256(answer), cfg['answer_hash'])`. Debug i
 
 `/api` op enumeration: all 4,698 `common.txt` words **and** ~120 AD/ACL-themed
 op names (`receipt`, `access`, `acl`, `decide`, `effective`, `resolve`,
-`permission`, `session`, `enroll`, …) × GET+POST return the generic JSON 404 —
-this container's `kind` has **no reachable op**. The `:8300` `/api/view`
-traversal cannot be reused here (this is a different, newer runtime — see below).
+`permission`, `session`, `enroll`, …) × GET+POST, **plus 696 parameterized /
+query forms** (`/api/<stem>/<sid|name|resource|rid>`, `/api/<stem>?sid=…`,
+`/api/acl/<stem>`, `/api/ad/<stem>`) — every one returns the generic JSON 404, so
+this container's `kind` has **no reachable op**. `/downloads/` holds only
+`orchard-export.zip` (60 filenames probed). The `:8300` `/api/view` traversal
+cannot be reused here (this is a different, newer runtime — see below).
 
 ## Artifact
 
@@ -55,7 +58,7 @@ None of the names' 8 hex chars hide anything (280 bytes, ~40 % printable = rando
 
 ## What was submitted (all 403)
 
-`POST /submit` totals ≈ **235,000** candidates:
+`POST /submit` totals ≈ **337,000** candidates:
 
 1. **round 1** (`solve.py`, 217,296 cands): the raw ACE/ACL JSON; all len 1–3
    permutations of a 14-value pool `{resource, resource-hex, SIDs/names/rids of

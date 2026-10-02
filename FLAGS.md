@@ -31,6 +31,8 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | misc/pitlane-desk | `safctf{9cca688790c893101757448298adfb67}` | chal/misc/pitlane-desk/NOTES.md |
 | misc/ticket-carousel | `safctf{5b701cd93c298559638b8b4181bfa5e2}` | chal/misc/ticket-carousel/NOTES.md |
 | misc/workshop-nocturne | `safctf{1cf16fdf78edcd426f2b8e008c329206}` | chal/misc/workshop-nocturne/NOTES.md |
+| mobile/comeback-pocket | `safctf{408e83b586354238e5a8e968a74b8b64}` | chal/mobile/comeback-pocket/NOTES.md |
+| mobile/comeback-pocket | `safctf{ddd6569c-7655-4aa8-84e8-cd7f4acd4f78}` | chal/mobile/comeback-pocket/NOTES.md |
 | mobile/no-strings-attached | `safctf{94f40cc66658c67503a859cf383c7622}` | chal/mobile/no-strings-attached/NOTES.md |
 | pwn/encore | `safctf{a6aca5b356ad7824a01d0a767b2cd998}` | chal/pwn/encore/NOTES.md |
 | pwn/moonbase-radio | `safctf{d8e20273d4d4cd65472f84b4316666eb}` | chal/pwn/moonbase-radio/NOTES.md |

@@ -20,6 +20,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | cve/fan-signal-lab | `safctf{e5ca75a4e6e0507f9dd29be81997b9b6}` | chal/cve/fan-signal-lab/NOTES.md |
 | forensics/blue-meridian | `safctf{756f7d81426571a6d6dac9b1aae5f271}` | chal/forensics/blue-meridian/NOTES.md |
 | forensics/fancy-details | `safctf{245ccf0110f6422d41671064cee8da68}` | chal/forensics/fancy-details/NOTES.md |
+| forensics/last-tram-home | `safctf{a7290ed4a3ba7af7bd4b4c529eb99314}` | chal/forensics/last-tram-home/NOTES.md |
 | forensics/matchday-replay | `safctf{5554fd00-017a-4915-a883-a7ef2639f73b}` | chal/forensics/matchday-replay/solve.py |
 | forensics/matchday-replay | `safctf{e2d6cc7b320577dd3eb54aa08f86e446}` | chal/forensics/matchday-replay/NOTES.md |
 | forensics/second-pressing | `safctf{12bbc51d-7450-44c6-af3f-1723514b8aad}` | chal/forensics/second-pressing/NOTES.md |

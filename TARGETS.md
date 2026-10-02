@@ -49,7 +49,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 
 ## OSINT
 | 8480 | Paper Lanterns | todo | Werkzeug |
-| 8490 | Last Tram Home | todo | Werkzeug |
+| 8490 | Last Tram Home | solved | see chal/ NOTES.md |
 | 8500 | Blue Meridian | solved | see chal/ NOTES.md |
 
 ## REVERSE

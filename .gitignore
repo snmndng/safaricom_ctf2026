@@ -67,3 +67,8 @@ chal/pwn/moonbase-radio/receipt
 .claude/helpers/
 .claude/settings.json
 chal/rev/prism-orchestra/receipt
+
+# Project-local third-party tooling, installed skills, and runtime caches
+.tools/ctf/
+.agents/skills/
+.token-optimizer/

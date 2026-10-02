@@ -21,7 +21,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8080 | Internal Affairs | solved | |
 | 8090 | Secret Vault | solved | login SQLi, WAF spacing bypass (`'OR'`) + leaked AES key |
 | 8100 | JWT Forgery | solved | |
-| 8110 | Mr Beast Configuration | **blocked** | broken as deployed — see memory |
+| 8110 | Mr Beast Configuration | **blocked** | broken as deployed — GET-only bespoke Flask app with exactly `/`, `/config`, `/hint`, `/admin`. The intended vuln `/config` (`{k:v for k,v in app.config.items() if k.isupper()}` → `jsonify`) **always** raises `TypeError: Object of type timedelta is not JSON serializable` because Flask's default config always carries `PERMANENT_SESSION_LIFETIME`; `/admin` is Basic-auth gated by the very creds only `/config` could leak. Werkzeug console reachable with `Host: localhost` (EVALEX=true) but PIN-locked and the PIN's private inputs (`uuid.getnode()`, `get_machine_id()`) are not remotely derivable. 142 Basic creds + 12 forged session cookies tried. See memory. |
 | 8120 | Prompt Pirate | solved | |
 | 8140 | You Snitch | solved | PHP UNION SQLi in `/lookup.php?name=` (PostgreSQL) |
 | 8150 | Tomcat Path Traversal (front) | solved | waitress Flask `GET /view?file=` traversal leaks `/app/app.py` creds |
@@ -58,7 +58,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8530 | Prism Orchestra | solved | 24-byte stack VM: invert XOR/ADD/rol8/swap in reverse + .data XOR |
 
 ## AD
-| 8570 | Orchard Society | todo | Werkzeug |
+| 8570 | Orchard Society | **blocked** | 300-pt AD. Decision fully resolved (visitor `…-1000` → 1013 → 1027 → 1046 → **1068 allow**, the deny on 1069 is a decoy) but the receipt is not recoverable: ~235k joins/hashes of every material field 403'd, and unlike Winter Pavilion (:8580) the deciding row has no `guid|…`-shaped identity to join. Runs the **newer** runtime (every `/api/<op>` → JSON 404) so the `:8300` traversal cannot leak its source. See `chal/ad/orchard-society/NOTES.md`. |
 | 8580 | Winter Pavilion | solved | see chal/ NOTES.md |
 | 8590 | Crown Studio | solved | see chal/ NOTES.md |
 

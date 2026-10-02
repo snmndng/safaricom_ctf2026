@@ -7,6 +7,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 
 | Challenge | Flag | Source |
 | --- | --- | --- |
+| ad/crown-studio | `safctf{04fd9ff98e41c5ef8a54da3990126b58}` | chal/ad/crown-studio/NOTES.md |
 | ai/fragments | `safctf{d432e09718e6cb46387f54e27dbc0168}` | chal/ai/fragments/NOTES.md |
 | api/night-bus | `safctf{81a90dc817371a5aa190e8069ebcde2c}` | chal/api/night-bus/NOTES.md |
 | cloud/greenroom-atlas | `safctf{6035ffad158ce604cb84927b77926d47}` | chal/cloud/greenroom-atlas/NOTES.md |
@@ -19,12 +20,9 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | crypto/three-encores | `safctf{0471ad15e84bb9f630e394e49dde85a9}` | chal/crypto/three-encores/solve.py |
 | crypto/three-encores | `safctf{dadb56ae-eede-422e-87cb-744462cdfda0}` | chal/crypto/three-encores/solve.py |
 | cve/fan-signal-lab | `safctf{e5ca75a4e6e0507f9dd29be81997b9b6}` | chal/cve/fan-signal-lab/NOTES.md |
-| forensics/blue-meridian | `safctf{756f7d81426571a6d6dac9b1aae5f271}` | chal/forensics/blue-meridian/NOTES.md |
 | forensics/fancy-details | `safctf{245ccf0110f6422d41671064cee8da68}` | chal/forensics/fancy-details/NOTES.md |
-| forensics/last-tram-home | `safctf{a7290ed4a3ba7af7bd4b4c529eb99314}` | chal/forensics/last-tram-home/NOTES.md |
 | forensics/matchday-replay | `safctf{5554fd00-017a-4915-a883-a7ef2639f73b}` | chal/forensics/matchday-replay/solve.py |
 | forensics/matchday-replay | `safctf{e2d6cc7b320577dd3eb54aa08f86e446}` | chal/forensics/matchday-replay/NOTES.md |
-| forensics/paper-lanterns | `safctf{38309964a77c499b1ec234c401f68fe1}` | chal/forensics/paper-lanterns/NOTES.md |
 | forensics/second-pressing | `safctf{12bbc51d-7450-44c6-af3f-1723514b8aad}` | chal/forensics/second-pressing/NOTES.md |
 | forensics/second-pressing | `safctf{34a793a0d11032abb97236fafc9b30c4}` | chal/forensics/second-pressing/NOTES.md |
 | misc/afterparty-crew | `safctf{66bda7b8ede495eb131f6bf5bbb9d889}` | chal/misc/afterparty-crew/NOTES.md |
@@ -38,6 +36,9 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | mobile/no-strings-attached | `safctf{94f40cc66658c67503a859cf383c7622}` | chal/mobile/no-strings-attached/NOTES.md |
 | mobile/northern-lights | `safctf{3fd96340be891c629f7e3f3a42202743}` | chal/mobile/northern-lights/NOTES.md |
 | mobile/northern-lights | `safctf{5068e894-3542-4574-ad65-1a5bfddd75eb}` | chal/mobile/northern-lights/NOTES.md |
+| osint/blue-meridian | `safctf{756f7d81426571a6d6dac9b1aae5f271}` | chal/osint/blue-meridian/NOTES.md |
+| osint/last-tram-home | `safctf{a7290ed4a3ba7af7bd4b4c529eb99314}` | chal/osint/last-tram-home/NOTES.md |
+| osint/paper-lanterns | `safctf{38309964a77c499b1ec234c401f68fe1}` | chal/osint/paper-lanterns/NOTES.md |
 | pwn/encore | `safctf{a6aca5b356ad7824a01d0a767b2cd998}` | chal/pwn/encore/NOTES.md |
 | pwn/moonbase-radio | `safctf{d8e20273d4d4cd65472f84b4316666eb}` | chal/pwn/moonbase-radio/NOTES.md |
 | pwn/neon-cabaret | `safctf{c6d2ec6a705f9a51db0be634224d3358}` | chal/pwn/neon-cabaret/NOTES.md |
@@ -45,7 +46,6 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | rev/clockwork-ballet | `safctf{93d4bf6a-b750-4379-9038-c4921872c148}` | chal/rev/clockwork-ballet/NOTES.md |
 | rev/pixel-courier | `safctf{e7802274-4b04-488a-9319-39ca86e83c9f}` | chal/rev/pixel-courier/NOTES.md |
 | rev/prism-orchestra | `safctf{406279bd-3201-499f-9a4a-f14e8918eb37}` | chal/rev/prism-orchestra/NOTES.md |
-| web/crown-studio | `safctf{04fd9ff98e41c5ef8a54da3990126b58}` | chal/web/crown-studio/NOTES.md |
 | web/ginger-juice-shop | `safctf{42dd8c3f359acdfc9b4250f4864ffc35}` | chal/web/ginger-juice-shop/NOTES.md |
 | web/head-office | `safctf{e657eef1b0b097c60911f62cfe4ec61b}` | chal/web/head-office/solve.py |
 | web/internal-affairs | `safctf{9f3a458f3a26e6372b5b5467e3e51edf}` | chal/web/internal-affairs/solve.py |

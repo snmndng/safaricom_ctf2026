@@ -29,11 +29,11 @@ after brute force failed and the source was read instead.
 | `cloud-kube` | Greenroom Atlas | 8410 | RBAC PATCH → editor → workload automount → SA token |
 | `crypto-oracle` | Midnight Parcel | 8440 | CBC padding oracle on `/api/receipt` |
 | `misc-machine` | Ticket Carousel | 8630 | BFS the `transitions` DFA in settings.json |
-| `misc-zip` | *unmapped* | — | zip with duplicate `show.json` entries; first read is the check |
+| `misc-zip` | Double Feature | 8640 | duplicate zip members: `read(ZipInfo)` hits entry 1, `read(name)` hits entry 2 |
 | `ad-certificate` | Crown Studio | 8590 | AD CS ESC1 — no approval + `supplySubject` + clientAuth |
 
-Two kinds are **unmapped** (`api-canonical`, `misc-zip`): they belong to
-challenges whose port we have not identified. Their logic is in the source.
+One kind is still **unmapped** (`api-canonical`): it belongs to a challenge whose
+port we have not identified. Its logic is in the source.
 
 ## Notes
 

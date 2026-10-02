@@ -123,7 +123,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8190 | Fragments | solved | keyword-gated /ask: memory|recall|history returns the redacted conversation |
 | 8200 | Encore | todo | PWN |
 | 8210 | Fancy Details | todo | FOR |
-| 8220 | Fan Signal Lab | todo | CVE (was "Text4Shell Lab") |
+| 8220 | Fan Signal Lab | solved | Text4Shell CVE-2022-42889 on Commons Text 1.8; GET /home?message= interpolation sink |
 | 8230 | Archived | solved | in-band XXE on POST /fetch_user; file:// entity -> dir listing -> /flag8b9d5b8e264a.txt |
 | 8330 | Night Bus | todo | API. Desk: `GET /api/orders` lists booking refs, `GET /api/orders/<ref>` returns a receipt — suspect IDOR. (agent died on quota before exploiting) |
 | 8340 | Backstage Ledger | todo | API |

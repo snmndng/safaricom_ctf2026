@@ -16,6 +16,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | crypto/parallel-lines | `safctf{8d6447b3f694f59efef1f015f58d04a7}` | chal/crypto/parallel-lines/NOTES.md |
 | crypto/three-encores | `safctf{0471ad15e84bb9f630e394e49dde85a9}` | chal/crypto/three-encores/solve.py |
 | crypto/three-encores | `safctf{dadb56ae-eede-422e-87cb-744462cdfda0}` | chal/crypto/three-encores/solve.py |
+| cve/fan-signal-lab | `safctf{e5ca75a4e6e0507f9dd29be81997b9b6}` | chal/cve/fan-signal-lab/NOTES.md |
 | forensics/matchday-replay | `safctf{5554fd00-017a-4915-a883-a7ef2639f73b}` | chal/forensics/matchday-replay/solve.py |
 | forensics/matchday-replay | `safctf{e2d6cc7b320577dd3eb54aa08f86e446}` | chal/forensics/matchday-replay/NOTES.md |
 | forensics/second-pressing | `safctf{12bbc51d-7450-44c6-af3f-1723514b8aad}` | chal/forensics/second-pressing/NOTES.md |

@@ -45,7 +45,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 ## FORENSICS
 | 8450 | Matchday Replay | solved | raw USER0 records, out-of-order reassembly + period-12 keystream |
 | 8460 | Second Pressing | solved | SQLite WAL — recover the pre-revision frame |
-| 8470 | Long Exposure | todo | 350-pt FOR. Deep negative — see `chal/forensics/long-exposure/NOTES.md`. Blocker: no seed/card id in any shipped file, so the keystream seed is unguessable from the materials. |
+| 8470 | Long Exposure | **blocked** | 350-pt FOR. Verdict after round 2: most likely **broken as deployed** (dropped seed/recipe file) — same class as 8110/8350. The sibling matchday-replay periodic-XOR rule is *proven* not to apply (no valid keystream period in 7..66 across all 8! fragment perms); no seed/card id is reachable in any shipped file or via any sibling. Do not re-attempt without the organizer generator. See `chal/forensics/long-exposure/NOTES.md`. |
 
 ## OSINT
 | 8480 | Paper Lanterns | solved | see chal/ NOTES.md |

@@ -37,6 +37,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | rev/clockwork-ballet | `safctf{93d4bf6a-b750-4379-9038-c4921872c148}` | chal/rev/clockwork-ballet/NOTES.md |
 | rev/pixel-courier | `safctf{e7802274-4b04-488a-9319-39ca86e83c9f}` | chal/rev/pixel-courier/NOTES.md |
 | rev/prism-orchestra | `safctf{406279bd-3201-499f-9a4a-f14e8918eb37}` | chal/rev/prism-orchestra/NOTES.md |
+| web/crown-studio | `safctf{04fd9ff98e41c5ef8a54da3990126b58}` | chal/web/crown-studio/NOTES.md |
 | web/ginger-juice-shop | `safctf{42dd8c3f359acdfc9b4250f4864ffc35}` | chal/web/ginger-juice-shop/NOTES.md |
 | web/head-office | `safctf{e657eef1b0b097c60911f62cfe4ec61b}` | chal/web/head-office/solve.py |
 | web/internal-affairs | `safctf{9f3a458f3a26e6372b5b5467e3e51edf}` | chal/web/internal-affairs/solve.py |

@@ -60,7 +60,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 ## AD
 | 8570 | Orchard Society | todo | Werkzeug |
 | 8580 | Winter Pavilion | todo | Werkzeug |
-| 8590 | Crown Studio | todo | Werkzeug |
+| 8590 | Crown Studio | solved | see chal/ NOTES.md |
 
 ## UNLISTED (live apps not in CHALLENGES.md)
 | 8540 | Pitlane Desk | solved | SUID stage-report -> PATH hijack to root |

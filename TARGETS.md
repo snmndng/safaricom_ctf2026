@@ -130,7 +130,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8350 | Photo Finish | **blocked** | re-fingerprinted 2026-10-02: stock **unregistered Nessus Expert** UI (HTTPS-only, `Server: NessusWWW`). Challenge app not deployed — see below. |
 | 8360 | Comeback Pocket | solved | see chal/ NOTES.md |
 | 8370 | Northern Lights | solved | see chal/ NOTES.md |
-| 8380 | Glass Arcade | todo | MOB |
+| 8380 | Glass Arcade | solved | see chal/ NOTES.md |
 | 8390 | Harbor Lights | solved | see chal/ NOTES.md |
 
 ## `/submit` availability across the remaining ports (probed 2026-10-02)

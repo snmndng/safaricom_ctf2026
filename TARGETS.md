@@ -48,7 +48,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8470 | Long Exposure | todo | Werkzeug |
 
 ## OSINT
-| 8480 | Paper Lanterns | todo | Werkzeug |
+| 8480 | Paper Lanterns | solved | see chal/ NOTES.md |
 | 8490 | Last Tram Home | solved | see chal/ NOTES.md |
 | 8500 | Blue Meridian | solved | see chal/ NOTES.md |
 

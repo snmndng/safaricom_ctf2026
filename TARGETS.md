@@ -131,7 +131,7 @@ Ports we had never found. Same host, same `safctf{}` flag.
 | 8360 | Comeback Pocket | todo | MOB |
 | 8370 | Northern Lights | todo | MOB |
 | 8380 | Glass Arcade | todo | MOB |
-| 8390 | Harbor Lights | todo | CLOUD |
+| 8390 | Harbor Lights | solved | see chal/ NOTES.md |
 
 ## `/submit` availability across the remaining ports (probed 2026-10-02)
 

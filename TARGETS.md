@@ -71,7 +71,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8620 | Moonbase Radio | solved | UAF function pointer → ret2win (leak PIE via menu 1) |
 | 8630 | Ticket Carousel | solved | BFS the served 40-state DFA: `DAB` reaches closing state 39 |
 | 8640 | Double Feature | solved | duplicate zip members: read(ZipInfo) vs read(name) |
-| 8650 | Signal Garden | ? | Werkzeug |
+| 8650 | Signal Garden | solved | two-tone FSK: AA55 sync + 71 frames of [alternating marker][7 data bits] -> complement odd frames -> Base32 -> flag |
 
 ## "Offline" set — actually live behind desk apps (found 2026-10-02)
 

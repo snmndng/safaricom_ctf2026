@@ -10,6 +10,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | ad/crown-studio | `safctf{04fd9ff98e41c5ef8a54da3990126b58}` | chal/ad/crown-studio/NOTES.md |
 | ad/winter-pavilion | `safctf{8a97f3881e4828d37406ed0953ff9573}` | chal/ad/winter-pavilion/NOTES.md |
 | ai/fragments | `safctf{d432e09718e6cb46387f54e27dbc0168}` | chal/ai/fragments/NOTES.md |
+| api/backstage-ledger | `safctf{414329f08fe10f2027b4afeb2e5bba9b}` | chal/api/backstage-ledger/NOTES.md |
 | api/night-bus | `safctf{81a90dc817371a5aa190e8069ebcde2c}` | chal/api/night-bus/NOTES.md |
 | cloud/greenroom-atlas | `safctf{6035ffad158ce604cb84927b77926d47}` | chal/cloud/greenroom-atlas/NOTES.md |
 | cloud/harbor-lights | `safctf{0a7fe9c5e49d7fbe62cea634195d0adf}` | chal/cloud/harbor-lights/NOTES.md |

@@ -1,29 +1,58 @@
-# In-flight leads at halt (2026-10-02)
+# In-flight leads at halt (2026-10-02, second halt — API key rotation)
 
-Captured because the session was halted to rotate the API key, and agent
-context does not survive a restart. Leads are **unverified** — the agent that
-produced each was killed mid-thought.
+Captured because the session was halted to swap the API key. Agent context does
+not survive a restart. Leads are **unverified** — the agent that produced each was
+killed mid-thought.
 
-| Challenge | Port | Last state before halt |
-| --- | --- | --- |
-| Long Exposure | 8470 | *"The NOI packets may be stacked noise frames — a per-position bias would be the 'long exposure' reveal."* Suggests many frames + averaging/bias per pixel position. |
-| Photo Finish | 8350 | *"8350 is a Nessus, not a desk app."* — i.e. the banner is a Nessus scanner, so `:8350` may be the wrong target or a red herring. Needs re-fingerprinting before more work. |
-| Backstage Ledger | 8340 | Killed immediately after launch; no findings. |
-| Citrus Proof | 8320 | *"Use the sibling RCE (port 8050, already solved) as a pivot to look for the host Docker API."* Wild idea, unverified — treat with suspicion. |
+## Halted agents
 
-## Worktrees holding unmerged partial work
+| Challenge | Port | Agent id | Last state before halt |
+| --- | --- | --- | --- |
+| Backstage Ledger | 8340 | `a9ba573fb946b8e99` | Enumerating its own API surface — probing `/api/profile` with `X-Session`/`user`/`profile`/`demo`/`debug` params, then root-level data files and `/downloads`, `/static`. No flag. |
+| Orchard Society | 8570 | `a08fb90f2302f379e` | *"Read the solved siblings' NOTES to learn the exact receipt-recipe convention, then shotgun-hash."* — i.e. it had concluded the answer is a derived receipt, not a brute-forced secret. No flag. |
 
-Each is a live git worktree under `.claude/worktrees/`; branches still exist.
-The **first** Citrus Proof attempt (dead on quota) also holds its own worktree
-with ~28 min of fuzzing scripts, and owns the branch name `chal/web/citrus-proof`.
+Both can be resumed with SendMessage to their agent id **if the session survives
+the key swap**; otherwise their worktrees persist on disk.
 
-- `agent-a264bf47aea27b87d` — Long Exposure
-- `agent-a71a57903033994ef` — Photo Finish
-- `agent-a3077f6eccc9255de` — Backstage Ledger
-- `agent-afda0e95a4bb87565` — Citrus Proof (second attempt)
-- `agent-a95bab3e0254bbe9c` — Citrus Proof (first attempt, has fuzzers)
+## Solved during this halt
+
+**Citrus Proof (:8320, 550) — SOLVED.** Flag
+`safctf{83f575a861a0c69d675d700dcb658cd2}`, committed `fe13c7b`, merged `d46153d`,
+board `5a6fbc0`. Its agent was killed *as it was about to commit* — the solve was
+recovered from its worktree and independently re-verified before landing.
+
+The bug: the JWT verifier **trusts a signing key supplied in the header**
+(`head['jwk']['k']`), so a `{"role":"curator"}` token is self-signed, not cracked.
+The leak came from sibling challenge **Touchline Dispatch (:8300)**'s path
+traversal reading `/app/service.py`. Curator + `/api/proof` = Jinja2 SSTI with
+`_ [ ]` filtered, dodged via `|attr()` with names taken from query args.
+
+## Gotcha hit while landing Citrus Proof
+
+`land.sh <branch>` merges the **named branch**, not your worktree's
+`worktree-agent-<id>` branch. The first Citrus attempt still had
+`chal/web-citrus-proof` checked out in its own worktree, so `git branch -f`
+refused and `land.sh chal/web-citrus-proof` merged an *empty* branch — flipping
+TARGETS.md to "solved" with no flag and no NOTES update. TARGETS.md lied for one
+commit. **Always check `git merge-base --is-ancestor <your-commit> main` after a
+land, and grep FLAGS.md for the flag.**
+
+`chal/web-citrus-proof` still points at the **stale first attempt** (`5b17ec0`),
+not the solve. The canonical solve is `fe13c7b` / merged as `d46153d`. Do not
+re-land that branch name.
+
+## Still open in scope
+
+- **Long Exposure (8470, 350)** — deep negative; blocker is structural (no seed in
+  any shipped file). Needs a new input, not a new agent.
+- **Path Least Travelled (8000)** — connection refused on every probe, including
+  this halt. Down.
+- **Mr Beast (8110), Photo Finish (8350)** — blocked as deployed, do not re-attempt.
 
 ## State at halt
 
-Board **40 solved / 45 flags**, HEAD `510619b`, working tree clean apart from
+Board **51 solved / 59 flags**, HEAD `5a6fbc0`, working tree clean apart from
 untracked `.ignore`, `.mcp.json`, `Remaining_challenges.md`.
+
+49 worktrees remain under `.claude/worktrees/` — most are finished solves whose
+branches are already merged and could be pruned.

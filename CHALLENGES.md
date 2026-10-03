@@ -1,6 +1,6 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Solved: 54 — see FLAGS.md for the flag list.**
+**Solved: 55 — see FLAGS.md for the flag list.**
 Remaining in scope: Orchard Society :8570, Long Exposure :8470,
 Path Least Travelled :8000 (down — connection refused).
 Blocked as deployed: Mr Beast :8110, Photo Finish :8350.

@@ -6,7 +6,7 @@ category: web
 difficulty: easy
 points: 150
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Sneaky Includes

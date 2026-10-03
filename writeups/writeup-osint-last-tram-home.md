@@ -6,7 +6,7 @@ category: osint
 difficulty: hard
 points: 500
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Last Tram Home

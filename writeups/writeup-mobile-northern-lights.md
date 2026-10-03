@@ -6,7 +6,7 @@ category: malware
 difficulty: hard
 points: 500
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Northern Lights

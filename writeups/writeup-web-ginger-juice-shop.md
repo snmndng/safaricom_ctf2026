@@ -6,7 +6,7 @@ category: web
 difficulty: medium
 points: 350
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Ginger Juice Shop

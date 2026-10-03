@@ -6,7 +6,7 @@ category: crypto
 difficulty: hard
 points: 750
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Midnight Parcel

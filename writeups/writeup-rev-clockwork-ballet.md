@@ -6,7 +6,7 @@ category: reverse
 difficulty: medium
 points: 500
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Clockwork Ballet

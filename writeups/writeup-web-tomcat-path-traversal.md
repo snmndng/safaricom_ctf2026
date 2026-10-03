@@ -6,7 +6,7 @@ category: web
 difficulty: medium
 points: 450
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Tomcat Path Traversal

@@ -6,7 +6,7 @@ category: web
 difficulty: medium
 points: 300
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # SSTI Secrets

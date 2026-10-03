@@ -6,7 +6,7 @@ category: pwn
 difficulty: medium
 points: 320
 flag_format: "safctf{...}"
-author: "safaricom-ctf-team"
+author: "nomadspecter <the.nomad.specter@gmail.com>"
 ---
 
 # Overtime

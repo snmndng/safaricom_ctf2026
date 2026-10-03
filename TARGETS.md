@@ -10,7 +10,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 
 | Port | Challenge | Status | Notes |
 | --- | --- | --- | --- |
-| 8000 | Path Least Travelled | **DOWN** | connection refused (2026-10-02) |
+| 8000 | Path Least Travelled | **DOWN** | connection refused (2026-10-02). ⚠️ **Trap:** a 2026-10-02 agent "solved" this by reading `/app/private/reserve.txt` on **:8300** — that flag is Touchline Dispatch's, not this challenge's. Every family container writes *its own* FLAG to `private/reserve.txt`, so reading it proves nothing about a different challenge. PLT is 300 pts, "path traversal + filter bypass". |
 | 8010 | Quick Recovery | solved | |
 | 8020 | Templated Malice | solved | |
 | 8030 | Sneaky Includes | solved | |
@@ -29,7 +29,7 @@ Flag format: **`safctf{...}`** (observed: `safctf{` + 32 hex + `}`).
 | 8170 | Inner Joiner | **blocked** | no route — documented dead end. Re-probed 2026-10-02: every path (`/`, `/health`, `/downloads/`, `/submit`, `/api/`, `/robots.txt`) returns the bare `404 page not found`, i.e. Go's `http.NotFound`, not a Werkzeug HTML 404. The listener is up but registers no handlers. |
 | 8180 | HEAD Office | solved | |
 | 8240 | Tomcat Path Traversal (backend) | dead end | Tomcat 9.0.122, zero webapps; both CVEs N/A (Linux, read-only default) |
-| 8300 | Touchline Dispatch | solved | |
+| 8300 | Touchline Dispatch | solved | ⚠️ not Path Least Travelled — the two are separate 300-pt challenges on different ports (`CHALLENGES-WEB-URLS.md`). `/api/view?name=` absolute-path traversal here leaks this container only. |
 | 8310 | Velvet Rehearsal | solved | HTTP param pollution: first `?member=` checked, last signed |
 | 8320 | Citrus Proof | solved | see chal/ NOTES.md |
 

@@ -94,3 +94,72 @@ If the platform ever redeploys the real app on 8350, re-running `solve.py` will
 immediately tell you whether it is a Werkzeug app and whether `/submit` exists;
 the intended exploit (given this board's API pattern — see `chal/api/night-bus`)
 is almost certainly a BOLA/IDOR on a `/api/…/<id>` endpoint with a derivable id.
+
+---
+
+# ROUND 3 — 2026-10-02 (branch `chal/api-photo-finish-r3`)
+
+**Result: still no flag. The "app lives on another port" hypothesis is falsified
+by a full host sweep.** :8350 is unchanged stock Nessus.
+
+## 1. Re-fingerprint of :8350 (byte-exact, today)
+
+```
+GET http://54.72.82.22:8350/   -> 400, Server: NessusWWW
+    "You're speaking plain HTTP to an SSL-enabled server port."
+GET https://54.72.82.22:8350/  -> 200, Server: NessusWWW, <title>Nessus</title>
+    TLSv1.3 TLS_AES_256_GCM_SHA384, HSTS, CSP form-action 'self' … tenable.com
+    cert has no CN/SAN (self-signed internal)
+```
+
+Over TLS, the whole surface is Nessus, not a Flask app:
+
+| Probe (https) | Result |
+| --- | --- |
+| `/` | 200 — Nessus UI (`<title>Nessus</title>`) |
+| `/api` | 200 — page titled **"Nessus API Documentation"** (`nessus6-api.css`) |
+| `/submit` | **404 `File not found`** — Nessus's own JSON 404, *not* Flask |
+| `/api/orders`, `/api/photos`, `/api/races`, `/api/finish`, `/downloads/` | 404 `{"error":"The requested file was not found."}` |
+| `/server/properties` | 200 `{"nessus_type":"Nessus Expert","paid":false,…}` |
+
+Host-header **and** TLS-SNI routing re-tested with `photo-finish`, `photofinish`,
+`photo.finish`, `api`, `localhost`, `finish`, `photo`, `8350`,
+`chal-api-photo-finish`, the bare IP — **every one returns the Nessus page**. No
+vhost, no SNI routing.
+
+## 2. Host sweep 8000–8800 (the new lead) — no Photo Finish desk exists
+
+Swept every HTTP port 8000–8800 (thread pool) and grepped each page's
+`<title>`/`<h1>`/body for `photo|finish|moment|final second|freez|shutter|exposure`.
+
+- **59–65 live HTTP services**, all on the 80xx/81xx/82xx (scenario style) or
+  83xx–86xx (desk style) bands. **None** is titled "Photo Finish" or names this
+  challenge. Keyword hits are only incidental, and each is a *different*,
+  already-solved challenge:
+  - `8030` SIDE QUEST ("a brief **moment** of calm") — Sneaky Includes
+  - `8210` FRAME / FOUND ("travel **photography**", `/downloads/photo.jpg`) — Fancy Details
+  - `8470` Long Exposure ("some **moments** belong to the blue hour") — Long Exposure
+- **Desk-app signature** (`GET /submit -> 405`, `POST /submit {"answer":"x"} -> 403`)
+  is present on **every** 83xx–86xx challenge port **except 8350**:
+  `[8300,8310,8320,8330,8340, 8360,8370,8380,8390,8400,8410,8420,8430,8440,
+    8450,8460,8470,8480,8490,8500,8510,8520,8530,8540,8550,8560,8570,8580,8590,
+    8600,8610,8620,8630,8640,8650]`.
+  Photo Finish's slot is `8350`, and `8350/submit` is Nessus `400/404`. The desk
+  band is contiguous around it; the one missing member is exactly this challenge.
+- **Full-range connect scan** of 1–8000 and 8801–65535 found exactly **one**
+  other open port, `5060`, which speaks no HTTP and closes on HTTP/1.1 (no
+  banner on empty/SIP/TLS probes) — a dead/filtered socket, not a web app.
+
+Only one host is ever referenced anywhere in the repo (`54.72.82.22`); there is
+no second IP.
+
+## 3. Verdict
+
+Every port on `54.72.82.22` is accounted for: all 59–65 live HTTP services are
+known, solved challenges; the lone unlisted open port (`5060`) serves nothing;
+and `8350` — Photo Finish's assigned port — is a stock unregistered Nessus
+Expert install with no challenge route, no `/submit`, and no obtainable
+credential or artifact. **The Photo Finish app is genuinely not deployed on this
+host.** This is a host-side deployment fault (a foreign Nessus process squatting
+the challenge's port), not a solvable service — same class as `8110`
+Mr Beast Configuration. `solve.py --sweep` re-runs this verification end-to-end.

@@ -1,6 +1,6 @@
 # Safaricom CTF — Challenge Board & Triage
 
-**Solved: 55 — see FLAGS.md for the flag list.**
+**Solved: 56 — see FLAGS.md for the flag list.**
 Remaining in scope: Orchard Society :8570, Long Exposure :8470,
 Path Least Travelled :8000 (down — connection refused).
 Blocked as deployed: Mr Beast :8110, Photo Finish :8350.
@@ -23,6 +23,7 @@ Solved (55):
 - **FOR** — Matchday Replay (raw `LINKTYPE_USER0` records, out-of-order reassembly + period-12 keystream);
   Second Pressing (SQLite WAL — recover the pre-revision frame).
 - **MISC** — Ticket Carousel (unlisted :8630) — BFS the served 40-state DFA to its closing state.
+- **MOB** — No Strings Attached (300); Comeback Pocket (300); Secure Vault (300); Northern Lights (500); Glass Arcade (750).
 
 Triage columns:
 - **Conf** — confidence I can solve it, given a reachable target. `★★★` high, `★★` medium, `★` low/environment-dependent.

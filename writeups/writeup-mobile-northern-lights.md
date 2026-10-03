@@ -6,7 +6,7 @@ category: malware
 difficulty: hard
 points: 500
 flag_format: "safctf{...}"
-author: "nomadspecter <the.nomad.specter@gmail.com>"
+author: "Strawhats"
 ---
 
 # Northern Lights

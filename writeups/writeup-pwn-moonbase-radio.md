@@ -6,7 +6,7 @@ category: pwn
 difficulty: medium
 points: 500
 flag_format: "safctf{...}"
-author: "nomadspecter <the.nomad.specter@gmail.com>"
+author: "Strawhats"
 ---
 
 # Moonbase Radio

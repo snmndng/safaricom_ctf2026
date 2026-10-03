@@ -6,7 +6,7 @@ category: web
 difficulty: medium
 points: 450
 flag_format: "safctf{...}"
-author: "nomadspecter <the.nomad.specter@gmail.com>"
+author: "Strawhats"
 ---
 
 # Tomcat Path Traversal

@@ -6,7 +6,7 @@ category: web
 difficulty: easy
 points: 250
 flag_format: "safctf{...}"
-author: "nomadspecter <the.nomad.specter@gmail.com>"
+author: "Strawhats"
 ---
 
 # HEAD Office

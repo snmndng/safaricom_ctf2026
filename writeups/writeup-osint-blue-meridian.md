@@ -6,7 +6,7 @@ category: osint
 difficulty: hard
 points: 750
 flag_format: "safctf{...}"
-author: "nomadspecter <the.nomad.specter@gmail.com>"
+author: "Strawhats"
 ---
 
 # Blue Meridian

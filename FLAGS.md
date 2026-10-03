@@ -40,6 +40,7 @@ Desk-app challenges yield **two** flags: an intermediate `answer` (a receipt you
 | mobile/no-strings-attached | `safctf{94f40cc66658c67503a859cf383c7622}` | chal/mobile/no-strings-attached/NOTES.md |
 | mobile/northern-lights | `safctf{3fd96340be891c629f7e3f3a42202743}` | chal/mobile/northern-lights/NOTES.md |
 | mobile/northern-lights | `safctf{5068e894-3542-4574-ad65-1a5bfddd75eb}` | chal/mobile/northern-lights/NOTES.md |
+| mobile/secure-vault | `safctf{d9d4c9e7-0f00-48dd-937d-0337bfb14baa}` | chal/mobile/secure-vault/NOTES.md |
 | osint/blue-meridian | `safctf{756f7d81426571a6d6dac9b1aae5f271}` | chal/osint/blue-meridian/NOTES.md |
 | osint/last-tram-home | `safctf{a7290ed4a3ba7af7bd4b4c529eb99314}` | chal/osint/last-tram-home/NOTES.md |
 | osint/paper-lanterns | `safctf{38309964a77c499b1ec234c401f68fe1}` | chal/osint/paper-lanterns/NOTES.md |

@@ -1,0 +1,1 @@
+The camera spool retained a warm buffer after the blue-hour test. Original and processed takes were exported together.

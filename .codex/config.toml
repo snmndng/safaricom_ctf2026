@@ -1,0 +1,14 @@
+# Project-local MCP server; source and dependencies live under .tools/ctf.
+[mcp_servers.token-optimizer]
+command = "node"
+args = ["/home/nomad/safaricom_ctf/.tools/ctf/token-optimizer-mcp/dist/server/index.js"]
+cwd = "/home/nomad/safaricom_ctf"
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+
+[mcp_servers.token-optimizer.env]
+TOKEN_OPTIMIZER_CACHE_DIR = "/home/nomad/safaricom_ctf/.tools/ctf/state/cache"
+TOKEN_OPTIMIZER_STATE_DIR = "/home/nomad/safaricom_ctf/.tools/ctf/state"
+TOKEN_OPTIMIZER_UCR_DIR = "/home/nomad/safaricom_ctf/.tools/ctf/state/ucr"
+TOKEN_OPTIMIZER_BACKUP_DIR = "/home/nomad/safaricom_ctf/.tools/ctf/state/backups"
+TOKEN_OPTIMIZER_ANALYTICS_DB = "/home/nomad/safaricom_ctf/.tools/ctf/state/analytics.db"

@@ -1,0 +1,6 @@
+Long Exposure
+350 pts
+ 0  0
+Some moments belong to the blue hour.
+
+Connect to the challenge web service: http://54.72.82.22:8470

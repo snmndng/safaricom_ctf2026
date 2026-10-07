@@ -59,6 +59,15 @@ scratch/
 # ELF challenge binaries downloaded at runtime (no extension) — keep out of git
 chal/pwn/moonbase-radio/receipt
 
+# mobile/secure-vault — decompiled/repackaging artifacts, regenerable from
+# SecureVault_v1.apk (which is itself ignored as *.apk); debug.keystore is a
+# local signing cred, notices.txt is the APK's bundled license dump
+chal/mobile/secure-vault/apktool_out/
+chal/mobile/secure-vault/jadx_out/
+chal/mobile/secure-vault/extracted/
+chal/mobile/secure-vault/notices.txt
+chal/mobile/secure-vault/debug.keystore
+
 # graft's local graph cache — regenerable, not committed (run `graft build`).
 /graft/
 

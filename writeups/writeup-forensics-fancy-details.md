@@ -1,7 +1,7 @@
 ---
 title: "Fancy Details"
 ctf: "Safaricom CTF"
-date: 2026-10-04
+date: 2026-10-06
 category: forensics
 difficulty: medium
 points: 300
@@ -11,13 +11,64 @@ author: "Strawhats"
 
 # Fancy Details
 
-## Summary
+> **Category:** FORENSICS · **Points:** 300 · **Difficulty:** medium
+
+## Discovery, analysis & exploitation
+
+The full hunt below is reproduced from our working notes — recon, fingerprinting, the bug, dead ends, and the path to the flag.
 
 Desk: `http://54.72.82.22:8210/` ("FRAME / FOUND" photo archive)
 
-## Solution
+## Artifacts
+| file | url | sha256 |
+|------|-----|--------|
+| photo.jpg | `http://54.72.82.22:8210/downloads/photo.jpg` | `a6a6b08199234f8506c4443a0bd1bdedf4c15008edd68c8ecd8fd4e140e7bfe6` |
+| archive.tar.gz.enc | `http://54.72.82.22:8210/downloads/archive.tar.gz.enc` | `eda40c41de34c96a73e58c5730205dc30c4022e136bb7bdad66025238b4c3df0` |
 
-### Step 1: Run the solve script:
+(binaries fetched to `artifacts/`, not committed — repo gitignores binary extensions)
+
+## Format
+- `photo.jpg` — single clean progressive JPEG 1024x1024, no trailing/appended
+  data, no extra DQT/DHT stego, no LSB payload. The image content is an
+  AI-generated "folder + play button" illustration; its on-image digits
+  (0921 / 0-121 / 0321 / 5 08) are AI noise and are decoys.
+- `archive.tar.gz.enc` — 192-byte OpenSSL "Salted__" container
+  (`file`: "openssl enc'd data with salted password"), i.e. 8-byte salt +
+  176-byte ciphertext.
+
+## The anomaly (the "one detail that doesn't belong")
+Hand-crafted EXIF in `photo.jpg`:
+```
+Artist = "qebjffnc"                 <-- ROT13 of "drowssap"
+GPSLatitude  = 52 28 48             <-- decoy
+GPSLongitude = 1  53 24             <-- decoy
+```
+ROT13-decoding `qebjffnc` gives `drowssap`, which reversed is `password`.
+That is the passphrase ("a thoughtful touch can change the whole impression"
+= the artist tag was text-touched/encoded).
+
+## Decryption
+```
+openssl enc'd header  : Salted__
+cipher                : AES-256-CBC
+KDF                   : PBKDF2-HMAC-SHA256, 100000 iterations
+passphrase            : password
+```
+The resulting gzip stream is deliberately truncated (gzip trailer reports a
+bogus ISIZE and errors with "unexpected end of file"), but tar still reads the
+one stored member: `nested1.tar` -> `flag.txt`.
+
+(Note: the default `openssl enc` on modern OpenSSL uses an EVP_BytesToKey
+KDF; this archive uses `-pbkdf2` with 100000 iterations, so plain
+`openssl enc -d -aes-256-cbc -k password` fails — Python `hashlib.pbkdf2_hmac`
+was needed.)
+
+## Reproduce
+`python3 solve.py` (deps: requests, Pillow, pycryptodome)
+
+## Solve script
+
+`forensics/fancy-details/solve.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -101,8 +152,28 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 ```
+
+## Tools
+
+**Used in this solve:**
+
+- `hashlib`
+- `tarfile`
+- Python `requests` (HTTP client)
+- PyCryptodome
+- Pillow (imaging)
+- Python 3 (solver)
+- openssl
+
+**Other tools that fit this category:**
+
+- Wireshark / tshark (pcap)
+- Volatility 3 (memory)
+- binwalk + foremost (carving)
+- exiftool (metadata)
+- zsteg / StegSolve (image stego)
+- The Sleuth Kit / Autopsy (disk)
 
 ## Flag
 

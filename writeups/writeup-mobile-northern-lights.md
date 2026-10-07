@@ -1,7 +1,7 @@
 ---
 title: "Northern Lights"
 ctf: "Safaricom CTF"
-date: 2026-10-04
+date: 2026-10-06
 category: malware
 difficulty: hard
 points: 500
@@ -11,13 +11,39 @@ author: "Strawhats"
 
 # Northern Lights
 
-## Summary
+> **Category:** MOBILE · **Points:** 500 · **Difficulty:** hard
+
+## Discovery, analysis & exploitation
+
+The full hunt below is reproduced from our working notes — recon, fingerprinting, the bug, dead ends, and the path to the flag.
 
 Target: http://54.72.82.22:8370 (desk app; `POST /submit {"answer": ...}`)
 
-## Solution
+## Artifact
+- `/downloads/device-export.zip`
+- sha256 `dd8be3c21cee82782b306d66353b45d5634578f95918b13d64996c157fdf5d86`
+- Contents: `Manifest.db` (iOS backup manifest, SQLite), `Keychain.plist`,
+  `Library/Preferences/com.northern.lights.plist`, `Persistence.swift`,
+  `d4/d443ff447a8bfaa462b13d797ce4b9ad0142c607` (encrypted payload, 72 bytes).
 
-### Step 1: Run the solve script:
+## Scheme (documented in Persistence.swift)
+```
+key  = PBKDF2-SHA256(keychain.v_Data + UTF8(prefs.account), prefs.salt, prefs.iterations, 32)
+blob = nonce[12] || AES.GCM.sealed || tag[16]
+```
+
+## Solving
+- `Keychain.plist` has 13 items: **12 decoys** with `svce = preview`, and **one live**
+  item with `svce = com.northern.lights`, `acct = 18485ad7d74ed05fad7e518b`.
+- Prefs: `account = 18485ad7d74ed05fad7e518b` (matches the live item),
+  `iterations = 24000`, `salt = 00078d28e71f06971f45d914a5bb3387`.
+- Only the live keychain row's `v_Data` + that account derives a key that
+  authenticates the GCM blob. Decoys fail the tag check.
+- Blob splits: nonce = first 12 bytes, ciphertext+tag = remaining 60 bytes.
+
+## Solve script
+
+`mobile/northern-lights/solve.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -88,11 +114,32 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 ```
+
+## Tools
+
+**Used in this solve:**
+
+- `plistlib`
+- Python `urllib` (stdlib HTTP client)
+- `zipfile`
+- `cryptography` (AEAD/AES)
+- Python 3 (solver)
+
+**Other tools that fit this category:**
+
+- jadx / jadx-gui (DEX -> Java)
+- apktool (resources + smali)
+- Frida + objection (runtime hooking)
+- dex2jar + JD-GUI
+- adb (device/backup)
+- keytool / apksigner
 
 ## Flag
 
+Intermediate answer: `safctf{3fd96340be891c629f7e3f3a42202743}`  
+Graded flag: `safctf{5068e894-3542-4574-ad65-1a5bfddd75eb}`
+
 ```
-safctf{3fd96340be891c629f7e3f3a42202743}
+safctf{5068e894-3542-4574-ad65-1a5bfddd75eb}
 ```
